@@ -1,4 +1,4 @@
-package colors
+package main
 
 const (
 	ColorBlack  = "\u001b[30m"
