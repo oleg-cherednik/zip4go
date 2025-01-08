@@ -48,6 +48,7 @@ func (r ZipModelReader) readCentralData(readCentralDirectory bool) {
 
 func (r ZipModelReader) readEndCentralDirectory(in *SolidRandomAccessDataInput) {
 	fmt.Println("readEndCentralDirectory...")
+	findEndCentralDirectorySignature(in)
 }
 
 func (r ZipModelReader) readZip64(in *SolidRandomAccessDataInput) {
@@ -56,4 +57,16 @@ func (r ZipModelReader) readZip64(in *SolidRandomAccessDataInput) {
 
 func (r ZipModelReader) readCentralDirectory(in *SolidRandomAccessDataInput) {
 	fmt.Println("readCentralDirectory...")
+}
+
+func findEndCentralDirectorySignature(in *SolidRandomAccessDataInput) {
+	fmt.Println("findEndCentralDirectorySignature...")
+	commentLength := model.MAX_COMMENT_SIZE
+	absOffs := in.available() - model.ECD_MIN_SIZE
+
+	fmt.Println(commentLength, absOffs)
+
+	in.seek(absOffs)
+	absOffs -= 1
+
 }
