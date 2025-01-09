@@ -29,6 +29,7 @@ func (t *ZipModelReader) ReadCentralData() {
 
 func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
 	in := NewSolidRandomAccessDataInput(t.srcZip)
+	defer in.Close()
 
 	t.readEndCentralDirectory(in)
 	t.readZip64(in)
@@ -38,39 +39,30 @@ func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
 	}
 }
 
-func (t *ZipModelReader) readEndCentralDirectory(in *SolidRandomAccessDataInput) {
+func (t *ZipModelReader) readEndCentralDirectory(in RandomAccessDataInput) {
 	findEndCentralDirectorySignature(in)
 	t.endCentralDirectory = NewEndCentralDirectoryReader().Read(in)
 }
 
-func (t *ZipModelReader) readZip64(in *SolidRandomAccessDataInput) {
+func (t *ZipModelReader) readZip64(in RandomAccessDataInput) {
 	fmt.Println("readZip64...")
 }
 
-func (t *ZipModelReader) readCentralDirectory(in *SolidRandomAccessDataInput) {
+func (t *ZipModelReader) readCentralDirectory(in RandomAccessDataInput) {
 	fmt.Println("readCentralDirectory...")
 }
 
-func findEndCentralDirectorySignature(in *SolidRandomAccessDataInput) {
+func findEndCentralDirectorySignature(in RandomAccessDataInput) {
 	commentLength := model.MAX_COMMENT_SIZE
 	absOffs := in.Available() - model.ECD_MIN_SIZE
 
 	for {
-		err := in.SeekStart(absOffs)
-
-		if err != nil {
-			panic(err)
-		}
+		in.SeekStart(absOffs)
 
 		absOffs -= 1
 		commentLength -= 1
-		dwordSignature, err := in.IsDwordSignature(model.ECD_SIGNATURE)
 
-		if err != nil {
-			panic(err)
-		}
-
-		if dwordSignature {
+		if in.IsDwordSignature(model.ECD_SIGNATURE) {
 			in.Mark(model.MARKER_END_CENTRAL_DIRECTORY)
 			return
 		}

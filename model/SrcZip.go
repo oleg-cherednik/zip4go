@@ -11,15 +11,15 @@ type SrcZip struct {
 	size      int64
 }
 
-func NewSrcZip(zip string) (*SrcZip, error) {
+func NewSrcZip(zip string) *SrcZip {
 	fileInfo, err := os.Stat(zip)
 
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
 	size := fileInfo.Size()
-	return &SrcZip{byteOrder: binary.LittleEndian, path: zip, size: size}, nil
+	return &SrcZip{byteOrder: binary.LittleEndian, path: zip, size: size}
 }
 
 func (t *SrcZip) GetPath() string {

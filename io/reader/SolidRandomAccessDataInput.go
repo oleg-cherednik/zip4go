@@ -3,7 +3,6 @@ package reader
 import (
 	"github.com/oleg-cherednik/zip4go/model"
 	"golang.org/x/text/encoding/charmap"
-	"io"
 )
 
 type SolidRandomAccessDataInput struct {
@@ -24,26 +23,22 @@ func (t *SolidRandomAccessDataInput) GetAbsOffs() int64 {
 	return t.in.GetOffs()
 }
 
-func (t *SolidRandomAccessDataInput) SeekStart(absOffs int64) error {
-	return t.in.SeekStart(absOffs)
+func (t *SolidRandomAccessDataInput) SeekStart(absOffs int64) {
+	t.in.SeekStart(absOffs)
 }
 
-func (t *SolidRandomAccessDataInput) Close() error {
-	return t.in.Close()
+func (t *SolidRandomAccessDataInput) Close() {
+	t.in.Close()
 }
 
-func (t *SolidRandomAccessDataInput) IsDwordSignature(expected uint32) (bool, error) {
+func (t *SolidRandomAccessDataInput) IsDwordSignature(expected uint32) bool {
 	offs := t.GetAbsOffs()
 	actual := t.ReadDwordSignature()
 	absOffs := t.GetAbsOffs()
 
-	err := t.Backward(absOffs - offs)
+	t.Backward(absOffs - offs)
 
-	if err != nil {
-		return false, err
-	}
-
-	return actual == expected, nil
+	return actual == expected
 }
 
 func (t *SolidRandomAccessDataInput) Mark(id string) {}
@@ -60,30 +55,26 @@ func (t *SolidRandomAccessDataInput) ReadDword() uint32 {
 	return t.in.ReadDword()
 }
 
-func (t *SolidRandomAccessDataInput) Backward(bytes int64) error {
+func (t *SolidRandomAccessDataInput) Backward(bytes int64) {
 	absOffs := t.GetAbsOffs()
-	return t.SeekStart(absOffs - bytes)
+	t.SeekStart(absOffs - bytes)
 }
 
 func (t *SolidRandomAccessDataInput) ReadString(length int, charMap charmap.Charmap) string {
 	return t.in.ReadString(length, charMap)
 }
 
-func (t *SolidRandomAccessDataInput) ReadBytes(total int) (*[]byte, error) {
+func (t *SolidRandomAccessDataInput) ReadBytes(total int) *[]byte {
 	if total <= 0 {
-		return nil, nil
+		return nil
 	}
 
 	buf := make([]byte, total)
-	nowRead, err := t.in.Read(&buf, 0, cap(buf))
-
-	if nowRead == 0 || err == io.EOF {
-		return nil, io.EOF
-	}
+	nowRead := t.in.Read(&buf, 0, cap(buf))
 
 	if nowRead < total {
 		buf = buf[0:nowRead]
 	}
 
-	return &buf, nil
+	return &buf
 }

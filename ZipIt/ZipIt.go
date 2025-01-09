@@ -24,15 +24,8 @@ func Zip(zip string) *ZipIt {
 	return &ZipIt{zip: zip}
 }
 
-func (s ZipIt) Add(path string) error {
-	fmt.Println(s.zip, path)
-
-	srcZip, err := model.NewSrcZip(s.zip)
-
-	if err != nil {
-		return err
-	}
-
+func (s ZipIt) Add(path string) {
+	srcZip := model.NewSrcZip(s.zip)
 	zipModel := reader.NewZipModelReader(srcZip).Read()
 
 	fmt.Println(zipModel)
@@ -85,8 +78,6 @@ func (s ZipIt) Add(path string) error {
 	//
 	//fmt.Println("closing zip archive...")
 	//zipWriter.Close()
-
-	return nil
 }
 
 func isFileExists(filePath string) bool {

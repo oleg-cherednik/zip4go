@@ -13,7 +13,7 @@ func NewEndCentralDirectoryReader() *EndCentralDirectoryReader {
 	return &EndCentralDirectoryReader{}
 }
 
-func (t *EndCentralDirectoryReader) Read(in *SolidRandomAccessDataInput) *model.EndCentralDirectory {
+func (t *EndCentralDirectoryReader) Read(in DataInput) *model.EndCentralDirectory {
 	checkSignature(in)
 
 	ecd := model.NewEndCentralDirectory()
@@ -28,12 +28,12 @@ func (t *EndCentralDirectoryReader) Read(in *SolidRandomAccessDataInput) *model.
 	return ecd
 }
 
-func (t *EndCentralDirectoryReader) readComment(in *SolidRandomAccessDataInput) string {
+func (t *EndCentralDirectoryReader) readComment(in DataInput) string {
 	commentLength := int(in.ReadWord())
 	return in.ReadString(commentLength, *charmap.CodePage437)
 }
 
-func checkSignature(in *SolidRandomAccessDataInput) {
+func checkSignature(in DataInput) {
 	absOffs := in.GetAbsOffs()
 	actual := in.ReadDwordSignature()
 

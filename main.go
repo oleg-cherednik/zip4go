@@ -25,21 +25,4 @@ func main() {
 	//zipIt.Add(fileFerrari)
 	//zipIt.Add(fileWiesmann)
 
-	//var in, err = reader.NewRandomAccessFile(appNote)
-	//fmt.Println(in, err)
-	//
-	//offs, err := in.GetOffs()
-	//fmt.Println(offs)
-	//
-	//buf := make([]byte, 10)
-	//
-	//skipped, err := in.SkipBytes(34)
-	//fmt.Println(skipped, err)
-	//
-	//readNow, err := in.Read(&buf, 1, 7)
-	//fmt.Println(offs, readNow, buf)
-	//
-	//readNow, err = in.Read(&buf, 1, 7)
-	//fmt.Println(offs, readNow, buf)
-
 }

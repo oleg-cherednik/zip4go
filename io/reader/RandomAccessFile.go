@@ -45,35 +45,28 @@ func (t *RandomAccessFile) GetOffs() int64 {
 	return offs
 }
 
-func (t *RandomAccessFile) SeekStart(absOffs int64) error {
+func (t *RandomAccessFile) SeekStart(absOffs int64) {
 	// check for absOffs < 0
 	_, err := t.file.Seek(absOffs, io.SeekStart)
 
 	if err != nil {
-		return err
+		panic(err)
 	}
-
-	return nil
 }
 
-func (t *RandomAccessFile) SkipBytes(bytes int64) (int64, error) {
+func (t *RandomAccessFile) SkipBytes(bytes int64) int64 {
 	if bytes <= 0 {
-		return 0, nil
+		return 0
 	}
 
 	offs := t.GetOffs()
 	newOffs := min(t.size, offs+bytes)
 
-	err := t.SeekStart(newOffs)
-
-	if err != nil {
-		return -1, err
-	}
-
-	return newOffs - offs, nil
+	t.SeekStart(newOffs)
+	return newOffs - offs
 }
 
-func (t *RandomAccessFile) Read(buf *[]byte, offs int, len int) (int, error) {
+func (t *RandomAccessFile) Read(buf *[]byte, offs int, len int) int {
 	var b byte
 	var nowRead = 0
 	var err error
@@ -86,14 +79,14 @@ func (t *RandomAccessFile) Read(buf *[]byte, offs int, len int) (int, error) {
 			nowRead += 1
 		} else {
 			if err == io.EOF && nowRead > 0 {
-				err = nil
+				return nowRead
 			}
 
-			return nowRead, err
+			panic(err)
 		}
 	}
 
-	return nowRead, nil
+	return nowRead
 }
 
 func (t *RandomAccessFile) ReadWord() uint16 {
@@ -134,6 +127,10 @@ func (t *RandomAccessFile) ReadString(length int, charMap charmap.Charmap) strin
 	return string(buf)
 }
 
-func (t *RandomAccessFile) Close() error {
-	return t.file.Close()
+func (t *RandomAccessFile) Close() {
+	err := t.file.Close()
+
+	if err != nil {
+		panic(err)
+	}
 }
