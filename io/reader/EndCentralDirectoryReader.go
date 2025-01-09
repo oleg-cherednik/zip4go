@@ -32,6 +32,7 @@ func (t *EndCentralDirectoryReader) readComment(in *SolidRandomAccessDataInput) 
 	commentLength := int(in.ReadWord())
 	return in.ReadString(commentLength, *charmap.CodePage437)
 }
+
 func checkSignature(in *SolidRandomAccessDataInput) {
 	absOffs := in.GetAbsOffs()
 	actual := in.ReadDwordSignature()
