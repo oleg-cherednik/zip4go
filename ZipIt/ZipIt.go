@@ -33,7 +33,7 @@ func (s ZipIt) Add(path string) error {
 		return err
 	}
 
-	zipModel, err := reader.NewZipModelReader(srcZip).Read()
+	zipModel := reader.NewZipModelReader(srcZip).Read()
 
 	fmt.Println(zipModel)
 

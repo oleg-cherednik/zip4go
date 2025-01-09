@@ -11,14 +11,9 @@ type SolidRandomAccessDataInput struct {
 	in     *RandomAccessFile
 }
 
-func NewSolidRandomAccessDataInput(srcZip *model.SrcZip) (*SolidRandomAccessDataInput, error) {
-	in, err := NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder())
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &SolidRandomAccessDataInput{srcZip: srcZip, in: in}, nil
+func NewSolidRandomAccessDataInput(srcZip *model.SrcZip) *SolidRandomAccessDataInput {
+	in := NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder())
+	return &SolidRandomAccessDataInput{srcZip: srcZip, in: in}
 }
 
 func (t *SolidRandomAccessDataInput) Available() int64 {

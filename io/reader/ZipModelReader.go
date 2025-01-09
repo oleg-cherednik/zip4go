@@ -18,26 +18,17 @@ func NewZipModelReader(srcZip *model.SrcZip) *ZipModelReader {
 	return &ZipModelReader{srcZip: srcZip}
 }
 
-func (t *ZipModelReader) Read() (*model.ZipModel, error) {
-	err := t.ReadCentralData()
-
-	if err != nil {
-		return nil, err
-	}
-
-	return &model.ZipModel{}, nil
+func (t *ZipModelReader) Read() *model.ZipModel {
+	t.ReadCentralData()
+	return &model.ZipModel{}
 }
 
-func (t *ZipModelReader) ReadCentralData() error {
-	return t.readCentralData(true)
+func (t *ZipModelReader) ReadCentralData() {
+	t.readCentralData(true)
 }
 
-func (t *ZipModelReader) readCentralData(readCentralDirectory bool) error {
-	in, err := NewSolidRandomAccessDataInput(t.srcZip)
-
-	if err != nil {
-		return err
-	}
+func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
+	in := NewSolidRandomAccessDataInput(t.srcZip)
 
 	t.readEndCentralDirectory(in)
 	t.readZip64(in)
@@ -45,8 +36,6 @@ func (t *ZipModelReader) readCentralData(readCentralDirectory bool) error {
 	if readCentralDirectory {
 		t.readCentralDirectory(in)
 	}
-
-	return nil
 }
 
 func (t *ZipModelReader) readEndCentralDirectory(in *SolidRandomAccessDataInput) {

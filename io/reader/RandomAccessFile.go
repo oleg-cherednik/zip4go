@@ -14,21 +14,21 @@ type RandomAccessFile struct {
 	byteOrder binary.ByteOrder
 }
 
-func NewRandomAccessFile(fileName string, byteOrder binary.ByteOrder) (*RandomAccessFile, error) {
+func NewRandomAccessFile(fileName string, byteOrder binary.ByteOrder) *RandomAccessFile {
 	file, err := os.Open(fileName)
 
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
 	stats, err := file.Stat()
 
 	if err != nil {
-		return nil, err
+		panic(err)
 	}
 
 	size := stats.Size()
-	return &RandomAccessFile{fileName: fileName, size: size, file: file, byteOrder: byteOrder}, nil
+	return &RandomAccessFile{fileName: fileName, size: size, file: file, byteOrder: byteOrder}
 }
 
 func (t *RandomAccessFile) GetSize() int64 {
