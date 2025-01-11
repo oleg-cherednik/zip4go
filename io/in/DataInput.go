@@ -11,6 +11,7 @@ type DataInput interface {
 	GetAbsOffs() int64
 	ReadWord() uint16
 	ReadDword() uint32
+	ReadQword() uint64
 	ReadString(length int, charMap charmap.Charmap) string
 	ReadBytes(total int) *[]byte
 	ReadDwordSignature() uint32

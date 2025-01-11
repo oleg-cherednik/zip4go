@@ -15,7 +15,7 @@ func NewEndCentralDirectoryReader() *EndCentralDirectoryReader {
 }
 
 func (t *EndCentralDirectoryReader) Read(in in.DataInput) *model.EndCentralDirectory {
-	checkSignature(in)
+	t.checkSignature(in)
 
 	ecd := model.NewEndCentralDirectory()
 	ecd.SetTotalDisks(in.ReadWord())
@@ -34,11 +34,10 @@ func (t *EndCentralDirectoryReader) readComment(in in.DataInput) string {
 	return in.ReadString(commentLength, *charmap.CodePage437)
 }
 
-func checkSignature(in in.DataInput) {
+func (t *EndCentralDirectoryReader) checkSignature(in in.DataInput) {
 	absOffs := in.GetAbsOffs()
-	actual := in.ReadDwordSignature()
 
-	if actual != model.ECD_SIGNATURE {
+	if in.ReadDwordSignature() != model.ECD_SIG {
 		panic(errors.New("SignatureNotFoundException: " + strconv.FormatInt(absOffs, 16)))
 	}
 }

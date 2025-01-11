@@ -50,3 +50,7 @@ func (t *EndCentralDirectory) SetCentralDirectoryRelativeOffs(centralDirectoryRe
 func (t *EndCentralDirectory) SetComment(comment string) {
 	t.comment = comment
 }
+
+func (t *EndCentralDirectory) GetTotalDisks() uint16 {
+	return t.totalDisks
+}

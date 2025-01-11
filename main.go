@@ -6,6 +6,7 @@ import (
 
 func main() {
 	const zip = "d:/zip4jvm/__go__/src.zip"
+	const zip64 = "d:/zip4jvm/__go__/src64.zip"
 	const appNote = "d:/zip4jvm/foo/src/data/Oleg Cherednik.txt"
 
 	const fileBentley = "d:/zip4jvm/foo/src/cars/bentley-continental.jpg"
@@ -17,7 +18,7 @@ func main() {
 
 	// os.Remove(zip)
 
-	ZipIt.Zip(zip).Add(fileBentley)
+	ZipIt.Zip(zip64).Add(fileBentley)
 	//ZipIt.Zip(zip).Add(fileFerrari)
 	//ZipIt.Zip(zip).Add(fileWiesmann)
 	//zipIt := ZipIt.Zip(zip)

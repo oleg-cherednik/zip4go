@@ -30,6 +30,10 @@ func (t *SolidRandomAccessDataInput) SeekStart(absOffs int64) {
 	t.in.SeekStart(absOffs)
 }
 
+func (t *SolidRandomAccessDataInput) SeekMarker(id string) {
+	t.in.SeekStart(t.GetMark(id))
+}
+
 func (t *SolidRandomAccessDataInput) Available() int64 {
 	return t.srcZip.GetSize()
 }
@@ -56,6 +60,10 @@ func (t *SolidRandomAccessDataInput) ReadWord() uint16 {
 
 func (t *SolidRandomAccessDataInput) ReadDword() uint32 {
 	return t.in.ReadDword()
+}
+
+func (t *SolidRandomAccessDataInput) ReadQword() uint64 {
+	return t.in.ReadQword()
 }
 
 func (t *SolidRandomAccessDataInput) ReadString(length int, charMap charmap.Charmap) string {

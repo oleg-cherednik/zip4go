@@ -33,3 +33,7 @@ func (t *SrcZip) GetSize() int64 {
 func (t *SrcZip) GetByteOrder() binary.ByteOrder {
 	return t.byteOrder
 }
+
+func (t *SrcZip) GetAbsOffs(diskNo uint32, diskOffs uint64) int64 {
+	return int64(diskOffs)
+}

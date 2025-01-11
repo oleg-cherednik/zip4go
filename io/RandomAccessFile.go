@@ -112,7 +112,23 @@ func (t *RandomAccessFile) ReadDword() uint32 {
 	return v
 }
 
+func (t *RandomAccessFile) ReadQword() uint64 {
+	var v uint64
+
+	err := binary.Read(t.file, t.byteOrder, &v)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return v
+}
+
 func (t *RandomAccessFile) ReadString(length int, charMap charmap.Charmap) string {
+	if length == 0 {
+		return ""
+	}
+
 	buf := make([]byte, length)
 	nowRead, err := charMap.NewDecoder().Reader(t.file).Read(buf)
 

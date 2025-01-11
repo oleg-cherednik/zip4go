@@ -4,7 +4,9 @@ import (
 	"errors"
 	"fmt"
 	"github.com/oleg-cherednik/zip4go/io/in/file/rnd"
+	"github.com/oleg-cherednik/zip4go/io/reader/reader64"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/model64"
 )
 
 type ZipModelReader struct {
@@ -12,7 +14,7 @@ type ZipModelReader struct {
 
 	endCentralDirectory *model.EndCentralDirectory
 	centralDirectory    *model.CentralDirectory
-	zip64               *model.Zip64
+	zip64               *model64.Zip64
 }
 
 func NewZipModelReader(srcZip *model.SrcZip) *ZipModelReader {
@@ -43,10 +45,15 @@ func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
 func (t *ZipModelReader) readEndCentralDirectory(in rnd.RandomAccessDataInput) {
 	findEndCentralDirectorySignature(in)
 	t.endCentralDirectory = NewEndCentralDirectoryReader().Read(in)
+
+	//if t.endCentralDirectory.GetTotalDisks() > 0 {
+	//	panic(errors.New("split zip is not supported"))
+	//}
 }
 
 func (t *ZipModelReader) readZip64(in rnd.RandomAccessDataInput) {
-	fmt.Println("readZip64...")
+	in.SeekMarker(model.MARKER_END_CENTRAL_DIRECTORY)
+	t.zip64 = reader64.NewZip64Reader(t.srcZip).Read(in)
 }
 
 func (t *ZipModelReader) readCentralDirectory(in rnd.RandomAccessDataInput) {
@@ -63,7 +70,7 @@ func findEndCentralDirectorySignature(in rnd.RandomAccessDataInput) {
 		absOffs -= 1
 		commentLength -= 1
 
-		if in.IsDwordSignature(model.ECD_SIGNATURE) {
+		if in.IsDwordSignature(model.ECD_SIG) {
 			in.Mark(model.MARKER_END_CENTRAL_DIRECTORY)
 			return
 		}
