@@ -7,9 +7,9 @@ type BaseRandomAccessDataInput struct {
 	//srcZip *model.SrcZip
 }
 
-func NewBaseRandomAccessDataInput() *BaseRandomAccessDataInput {
-	return &BaseRandomAccessDataInput{MarkerDataInput: in.NewMarkerDataInput()}
-}
+//func NewBaseRandomAccessDataInput() *BaseRandomAccessDataInput {
+//	return &BaseRandomAccessDataInput{MarkerDataInput: in.NewMarkerDataInput()}
+//}
 
 // ---------- RandomAccessDataInput ----------
 

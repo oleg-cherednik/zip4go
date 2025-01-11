@@ -5,25 +5,29 @@ import (
 )
 
 type MarkerDataInput struct {
-	*BaseDataInput
-	marker *io.BaseMarker
+	marker     *io.BaseMarker
+	getAbsOffs func() int64
 }
 
-func NewMarkerDataInput() *MarkerDataInput {
+func NewMarkerDataInput(getAbsOffs func() int64) *MarkerDataInput {
 	return &MarkerDataInput{
-		BaseDataInput: NewBaseDataInput(),
-		marker:        io.NewBaseMarker()}
+		marker:     io.NewBaseMarker(),
+		getAbsOffs: getAbsOffs,
+	}
 }
 
 // ---------- Marker ----------
 
 func (t *MarkerDataInput) Mark(id string) {
+	t.marker.SetAbsOffs(t.getAbsOffs())
+	t.marker.Mark(id)
 }
 
 func (t *MarkerDataInput) GetMark(id string) int64 {
-	return 0
+	return t.marker.GetMark(id)
 }
 
 func (t *MarkerDataInput) GetMarkSize(id string) int64 {
-	return 0
+	t.marker.SetAbsOffs(t.getAbsOffs())
+	return t.marker.GetMarkSize(id)
 }

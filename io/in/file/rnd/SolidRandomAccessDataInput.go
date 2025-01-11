@@ -2,23 +2,26 @@ package rnd
 
 import (
 	"github.com/oleg-cherednik/zip4go/io"
+	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
 	"golang.org/x/text/encoding/charmap"
 )
 
 type SolidRandomAccessDataInput struct {
-	*BaseRandomAccessDataInput
+	*in.MarkerDataInput
 
 	srcZip *model.SrcZip
 	in     *io.RandomAccessFile
 }
 
 func NewSolidRandomAccessDataInput(srcZip *model.SrcZip) *SolidRandomAccessDataInput {
-	return &SolidRandomAccessDataInput{
-		BaseRandomAccessDataInput: NewBaseRandomAccessDataInput(),
-		srcZip:                    srcZip,
-		in:                        io.NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder()),
+	obj := SolidRandomAccessDataInput{
+		srcZip: srcZip,
+		in:     io.NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder()),
 	}
+
+	obj.MarkerDataInput = in.NewMarkerDataInput(obj.GetAbsOffs)
+	return &obj
 }
 
 // ---------- RandomAccessDataInput ----------
@@ -76,19 +79,6 @@ func (t *SolidRandomAccessDataInput) ReadBytes(total int) *[]byte {
 
 func (t *SolidRandomAccessDataInput) ReadDwordSignature() uint32 {
 	return t.ReadDword()
-}
-
-// ---------- Marker ----------
-
-func (t *SolidRandomAccessDataInput) Mark(id string) {
-}
-
-func (t *SolidRandomAccessDataInput) GetMark(id string) int64 {
-	return 0
-}
-
-func (t *SolidRandomAccessDataInput) GetMarkSize(id string) int64 {
-	return 0
 }
 
 // ---------- RandomAccessDataInput ----------
