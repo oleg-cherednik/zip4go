@@ -1,23 +1,22 @@
-package reader64
+package reader
 
 import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
-	"github.com/oleg-cherednik/zip4go/model/model64"
 	"strconv"
 )
 
-type EndCentralDirectoryReader struct{}
+type Zip64EndCentralDirectoryReader struct{}
 
-func NewEndCentralDirectoryReader() *EndCentralDirectoryReader {
-	return &EndCentralDirectoryReader{}
+func NewZip64EndCentralDirectoryReader() *Zip64EndCentralDirectoryReader {
+	return &Zip64EndCentralDirectoryReader{}
 }
 
-func (t *EndCentralDirectoryReader) Read(in in.DataInput) *model64.EndCentralDirectory {
+func (t *Zip64EndCentralDirectoryReader) Read(in in.DataInput) *model.Zip64EndCentralDirectory {
 	t.checkSignature(in)
 
-	ecd := model64.NewEndCentralDirectory()
+	ecd := model.NewZip64EndCentralDirectory()
 	ecd.SetEndCentralDirectorySize(in.ReadQword())
 	ecd.SetVersionMadeBy(in.ReadWord())
 	ecd.SetVersionToExtract(in.ReadWord())
@@ -31,7 +30,7 @@ func (t *EndCentralDirectoryReader) Read(in in.DataInput) *model64.EndCentralDir
 	return ecd
 }
 
-func (t *EndCentralDirectoryReader) checkSignature(in in.DataInput) {
+func (t *Zip64EndCentralDirectoryReader) checkSignature(in in.DataInput) {
 	absOffs := in.GetAbsOffs()
 
 	if in.ReadDwordSignature() != model.ZIP64_ECD_SIG {

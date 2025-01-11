@@ -1,23 +1,22 @@
-package reader64
+package reader
 
 import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
-	"github.com/oleg-cherednik/zip4go/model/model64"
 	"strconv"
 )
 
-type EndCentralDirectoryLocatorReader struct{}
+type Zip64EndCentralDirectoryLocatorReader struct{}
 
-func NewEndCentralDirectoryLocatorReader() *EndCentralDirectoryLocatorReader {
-	return &EndCentralDirectoryLocatorReader{}
+func NewEndCentralDirectoryLocatorReader() *Zip64EndCentralDirectoryLocatorReader {
+	return &Zip64EndCentralDirectoryLocatorReader{}
 }
 
-func (t *EndCentralDirectoryLocatorReader) Read(in in.DataInput) *model64.EndCentralDirectoryLocator {
+func (t *Zip64EndCentralDirectoryLocatorReader) Read(in in.DataInput) *model.Zip64EndCentralDirectoryLocator {
 	t.checkSignature(in)
 
-	ecdl := model64.NewEndCentralDirectoryLocator()
+	ecdl := model.NewZip64EndCentralDirectoryLocator()
 	ecdl.SetMainDiskNo(in.ReadDword())
 	ecdl.SetEndCentralDirectoryRelativeOffs(in.ReadQword())
 	ecdl.SetTotalDisks(in.ReadDword())
@@ -29,7 +28,7 @@ func (t *EndCentralDirectoryLocatorReader) Read(in in.DataInput) *model64.EndCen
 	return ecdl
 }
 
-func (t *EndCentralDirectoryLocatorReader) checkSignature(in in.DataInput) {
+func (t *Zip64EndCentralDirectoryLocatorReader) checkSignature(in in.DataInput) {
 	absOffs := in.GetAbsOffs()
 
 	if in.ReadDwordSignature() != model.ZIP64_ECDL_SIG {

@@ -1,6 +1,6 @@
-package model64
+package model
 
-type EndCentralDirectory struct {
+type Zip64EndCentralDirectory struct {
 
 	// size:4 - signature (0x06064b50)
 	// size:8 - directory record (n)
@@ -23,46 +23,46 @@ type EndCentralDirectory struct {
 	centralDirectoryRelativeOffs uint64
 }
 
-func NewEndCentralDirectory() *EndCentralDirectory {
-	return &EndCentralDirectory{}
+func NewZip64EndCentralDirectory() *Zip64EndCentralDirectory {
+	return &Zip64EndCentralDirectory{}
 }
 
-func (t *EndCentralDirectory) SetEndCentralDirectorySize(endCentralDirectorySize uint64) {
+func (t *Zip64EndCentralDirectory) SetEndCentralDirectorySize(endCentralDirectorySize uint64) {
 	t.endCentralDirectorySize = endCentralDirectorySize
 }
 
-func (t *EndCentralDirectory) SetVersionMadeBy(versionMadeBy uint16) {
+func (t *Zip64EndCentralDirectory) SetVersionMadeBy(versionMadeBy uint16) {
 	t.versionMadeBy = versionMadeBy
 }
 
-func (t *EndCentralDirectory) SetVersionToExtract(versionToExtract uint16) {
+func (t *Zip64EndCentralDirectory) SetVersionToExtract(versionToExtract uint16) {
 	t.versionToExtract = versionToExtract
 }
 
-func (t *EndCentralDirectory) SetDiskNo(diskNo uint32) {
+func (t *Zip64EndCentralDirectory) SetDiskNo(diskNo uint32) {
 	t.diskNo = diskNo
 }
 
-func (t *EndCentralDirectory) SetMainDiskNo(mainDiskNo uint32) {
+func (t *Zip64EndCentralDirectory) SetMainDiskNo(mainDiskNo uint32) {
 	t.mainDiskNo = mainDiskNo
 }
 
-func (t *EndCentralDirectory) SetDiskEntries(diskEntries uint64) {
+func (t *Zip64EndCentralDirectory) SetDiskEntries(diskEntries uint64) {
 	t.diskEntries = diskEntries
 }
 
-func (t *EndCentralDirectory) SetTotalEntries(totalEntries uint64) {
+func (t *Zip64EndCentralDirectory) SetTotalEntries(totalEntries uint64) {
 	t.totalEntries = totalEntries
 }
 
-func (t *EndCentralDirectory) SetCentralDirectorySize(centralDirectorySize uint64) {
+func (t *Zip64EndCentralDirectory) SetCentralDirectorySize(centralDirectorySize uint64) {
 	t.centralDirectorySize = centralDirectorySize
 }
 
-func (t *EndCentralDirectory) SetCentralDirectoryRelativeOffs(centralDirectoryRelativeOffs uint64) {
+func (t *Zip64EndCentralDirectory) SetCentralDirectoryRelativeOffs(centralDirectoryRelativeOffs uint64) {
 	t.centralDirectoryRelativeOffs = centralDirectoryRelativeOffs
 }
 
-func (t *EndCentralDirectory) GetEndCentralDirectorySize() uint64 {
+func (t *Zip64EndCentralDirectory) GetEndCentralDirectorySize() uint64 {
 	return t.endCentralDirectorySize
 }
