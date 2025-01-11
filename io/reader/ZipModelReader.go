@@ -3,6 +3,7 @@ package reader
 import (
 	"errors"
 	"fmt"
+	"github.com/oleg-cherednik/zip4go/io/in/file/random"
 	"github.com/oleg-cherednik/zip4go/model"
 )
 
@@ -28,7 +29,7 @@ func (t *ZipModelReader) ReadCentralData() {
 }
 
 func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
-	in := NewSolidRandomAccessDataInput(t.srcZip)
+	in := random.NewSolidRandomAccessDataInput(t.srcZip)
 	defer in.Close()
 
 	t.readEndCentralDirectory(in)
@@ -39,20 +40,20 @@ func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
 	}
 }
 
-func (t *ZipModelReader) readEndCentralDirectory(in RandomAccessDataInput) {
+func (t *ZipModelReader) readEndCentralDirectory(in *random.SolidRandomAccessDataInput) {
 	findEndCentralDirectorySignature(in)
 	t.endCentralDirectory = NewEndCentralDirectoryReader().Read(in)
 }
 
-func (t *ZipModelReader) readZip64(in RandomAccessDataInput) {
+func (t *ZipModelReader) readZip64(in *random.SolidRandomAccessDataInput) {
 	fmt.Println("readZip64...")
 }
 
-func (t *ZipModelReader) readCentralDirectory(in RandomAccessDataInput) {
+func (t *ZipModelReader) readCentralDirectory(in *random.SolidRandomAccessDataInput) {
 	fmt.Println("readCentralDirectory...")
 }
 
-func findEndCentralDirectorySignature(in RandomAccessDataInput) {
+func findEndCentralDirectorySignature(in *random.SolidRandomAccessDataInput) {
 	commentLength := model.MAX_COMMENT_SIZE
 	absOffs := in.Available() - model.ECD_MIN_SIZE
 

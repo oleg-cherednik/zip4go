@@ -1,17 +1,18 @@
-package reader
+package random
 
 import (
+	"github.com/oleg-cherednik/zip4go/io"
 	"github.com/oleg-cherednik/zip4go/model"
 	"golang.org/x/text/encoding/charmap"
 )
 
 type SolidRandomAccessDataInput struct {
 	srcZip *model.SrcZip
-	in     *RandomAccessFile
+	in     *io.RandomAccessFile
 }
 
 func NewSolidRandomAccessDataInput(srcZip *model.SrcZip) *SolidRandomAccessDataInput {
-	in := NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder())
+	in := io.NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder())
 	return &SolidRandomAccessDataInput{srcZip: srcZip, in: in}
 }
 
