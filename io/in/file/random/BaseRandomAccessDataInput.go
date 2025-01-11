@@ -1,21 +1,17 @@
 package random
 
-import (
-	"github.com/oleg-cherednik/zip4go/model"
-)
-
 type BaseRandomAccessDataInput struct {
-	srcZip *model.SrcZip
+	//srcZip *model.SrcZip
 }
 
-func NewBaseRandomAccessDataInput(srcZip *model.SrcZip) *BaseRandomAccessDataInput {
-	return &BaseRandomAccessDataInput{srcZip: srcZip}
+func NewBaseRandomAccessDataInput() *BaseRandomAccessDataInput {
+	return &BaseRandomAccessDataInput{}
 }
 
 // ---------- RandomAccessDataInput ----------
 
 // seek
 
-func (t *BaseRandomAccessDataInput) Available() int64 {
-	return t.srcZip.GetSize() //- t.child.GetAbsOffs()
-}
+//func (t *BaseRandomAccessDataInput) Available() int64 {
+//	return t.srcZip.GetSize() //- t.child.GetAbsOffs()
+//}

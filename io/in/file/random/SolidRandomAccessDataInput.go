@@ -7,13 +7,18 @@ import (
 )
 
 type SolidRandomAccessDataInput struct {
+	*BaseRandomAccessDataInput
+
 	srcZip *model.SrcZip
 	in     *io.RandomAccessFile
 }
 
 func NewSolidRandomAccessDataInput(srcZip *model.SrcZip) *SolidRandomAccessDataInput {
-	in := io.NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder())
-	return &SolidRandomAccessDataInput{srcZip: srcZip, in: in}
+	return &SolidRandomAccessDataInput{
+		BaseRandomAccessDataInput: NewBaseRandomAccessDataInput(),
+		srcZip:                    srcZip,
+		in:                        io.NewRandomAccessFile(srcZip.GetPath(), srcZip.GetByteOrder()),
+	}
 }
 
 func (t *SolidRandomAccessDataInput) Available() int64 {
