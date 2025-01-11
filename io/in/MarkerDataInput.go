@@ -1,18 +1,18 @@
-package reader
+package in
 
 import (
 	"github.com/oleg-cherednik/zip4go/io"
-	"github.com/oleg-cherednik/zip4go/io/in"
 )
 
 type MarkerDataInput struct {
-	dataInput *in.DataInput
-	marker    *io.BaseMarker
+	*BaseDataInput
+	marker *io.BaseMarker
 }
 
-func NewMarkerDataInput(dataInput *in.DataInput) *MarkerDataInput {
-	marker := io.NewBaseMarker()
-	return &MarkerDataInput{dataInput: dataInput, marker: marker}
+func NewMarkerDataInput() *MarkerDataInput {
+	return &MarkerDataInput{
+		BaseDataInput: NewBaseDataInput(),
+		marker:        io.NewBaseMarker()}
 }
 
 // ---------- Marker ----------

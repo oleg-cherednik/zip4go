@@ -1,11 +1,14 @@
 package random
 
+import "github.com/oleg-cherednik/zip4go/io/in"
+
 type BaseRandomAccessDataInput struct {
+	*in.MarkerDataInput
 	//srcZip *model.SrcZip
 }
 
 func NewBaseRandomAccessDataInput() *BaseRandomAccessDataInput {
-	return &BaseRandomAccessDataInput{}
+	return &BaseRandomAccessDataInput{MarkerDataInput: in.NewMarkerDataInput()}
 }
 
 // ---------- RandomAccessDataInput ----------
