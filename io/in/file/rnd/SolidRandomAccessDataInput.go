@@ -1,4 +1,4 @@
-package random
+package rnd
 
 import (
 	"github.com/oleg-cherednik/zip4go/io"
@@ -21,20 +21,14 @@ func NewSolidRandomAccessDataInput(srcZip *model.SrcZip) *SolidRandomAccessDataI
 	}
 }
 
-func (t *SolidRandomAccessDataInput) Available() int64 {
-	return t.srcZip.GetSize()
-}
-
-func (t *SolidRandomAccessDataInput) GetAbsOffs() int64 {
-	return t.in.GetOffs()
-}
+// ---------- RandomAccessDataInput ----------
 
 func (t *SolidRandomAccessDataInput) SeekStart(absOffs int64) {
 	t.in.SeekStart(absOffs)
 }
 
-func (t *SolidRandomAccessDataInput) Close() {
-	t.in.Close()
+func (t *SolidRandomAccessDataInput) Available() int64 {
+	return t.srcZip.GetSize()
 }
 
 func (t *SolidRandomAccessDataInput) IsDwordSignature(expected uint32) bool {
@@ -47,10 +41,10 @@ func (t *SolidRandomAccessDataInput) IsDwordSignature(expected uint32) bool {
 	return actual == expected
 }
 
-func (t *SolidRandomAccessDataInput) Mark(id string) {}
+// ---------- DataInput ----------
 
-func (t *SolidRandomAccessDataInput) ReadDwordSignature() uint32 {
-	return t.ReadDword()
+func (t *SolidRandomAccessDataInput) GetAbsOffs() int64 {
+	return t.in.GetOffs()
 }
 
 func (t *SolidRandomAccessDataInput) ReadWord() uint16 {
@@ -59,11 +53,6 @@ func (t *SolidRandomAccessDataInput) ReadWord() uint16 {
 
 func (t *SolidRandomAccessDataInput) ReadDword() uint32 {
 	return t.in.ReadDword()
-}
-
-func (t *SolidRandomAccessDataInput) Backward(bytes int64) {
-	absOffs := t.GetAbsOffs()
-	t.SeekStart(absOffs - bytes)
 }
 
 func (t *SolidRandomAccessDataInput) ReadString(length int, charMap charmap.Charmap) string {
@@ -83,4 +72,34 @@ func (t *SolidRandomAccessDataInput) ReadBytes(total int) *[]byte {
 	}
 
 	return &buf
+}
+
+func (t *SolidRandomAccessDataInput) ReadDwordSignature() uint32 {
+	return t.ReadDword()
+}
+
+// ---------- Marker ----------
+
+func (t *SolidRandomAccessDataInput) Mark(id string) {
+}
+
+func (t *SolidRandomAccessDataInput) GetMark(id string) int64 {
+	return 0
+}
+
+func (t *SolidRandomAccessDataInput) GetMarkSize(id string) int64 {
+	return 0
+}
+
+// ---------- RandomAccessDataInput ----------
+
+func (t *SolidRandomAccessDataInput) Backward(bytes int64) {
+	absOffs := t.GetAbsOffs()
+	t.SeekStart(absOffs - bytes)
+}
+
+// ----------
+
+func (t *SolidRandomAccessDataInput) Close() {
+	t.in.Close()
 }

@@ -2,7 +2,7 @@ package reader
 
 import (
 	"errors"
-	"github.com/oleg-cherednik/zip4go/io/in/file/random"
+	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
 	"golang.org/x/text/encoding/charmap"
 	"strconv"
@@ -14,7 +14,7 @@ func NewEndCentralDirectoryReader() *EndCentralDirectoryReader {
 	return &EndCentralDirectoryReader{}
 }
 
-func (t *EndCentralDirectoryReader) Read(in *random.SolidRandomAccessDataInput) *model.EndCentralDirectory {
+func (t *EndCentralDirectoryReader) Read(in in.DataInput) *model.EndCentralDirectory {
 	checkSignature(in)
 
 	ecd := model.NewEndCentralDirectory()
@@ -29,12 +29,12 @@ func (t *EndCentralDirectoryReader) Read(in *random.SolidRandomAccessDataInput) 
 	return ecd
 }
 
-func (t *EndCentralDirectoryReader) readComment(in *random.SolidRandomAccessDataInput) string {
+func (t *EndCentralDirectoryReader) readComment(in in.DataInput) string {
 	commentLength := int(in.ReadWord())
 	return in.ReadString(commentLength, *charmap.CodePage437)
 }
 
-func checkSignature(in *random.SolidRandomAccessDataInput) {
+func checkSignature(in in.DataInput) {
 	absOffs := in.GetAbsOffs()
 	actual := in.ReadDwordSignature()
 

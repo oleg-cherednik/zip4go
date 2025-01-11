@@ -12,5 +12,6 @@ type DataInput interface {
 	ReadWord() uint16
 	ReadDword() uint32
 	ReadString(length int, charMap charmap.Charmap) string
+	ReadBytes(total int) *[]byte
 	ReadDwordSignature() uint32
 }
