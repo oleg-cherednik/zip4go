@@ -66,3 +66,15 @@ func (t *Zip64EndCentralDirectory) SetCentralDirectoryRelativeOffs(centralDirect
 func (t *Zip64EndCentralDirectory) GetEndCentralDirectorySize() uint64 {
 	return t.endCentralDirectorySize
 }
+
+func (t *Zip64EndCentralDirectory) GetMainDiskNo() uint32 {
+	return t.mainDiskNo
+}
+
+func (t *Zip64EndCentralDirectory) GetTotalEntries() uint64 {
+	return t.totalEntries
+}
+
+func (t *Zip64EndCentralDirectory) GetCentralDirectoryRelativeOffs() uint64 {
+	return t.centralDirectoryRelativeOffs
+}

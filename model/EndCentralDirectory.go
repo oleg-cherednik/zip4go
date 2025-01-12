@@ -54,3 +54,15 @@ func (t *EndCentralDirectory) SetComment(comment string) {
 func (t *EndCentralDirectory) GetTotalDisks() uint16 {
 	return t.totalDisks
 }
+
+func (t *EndCentralDirectory) GetMainDiskNo() uint16 {
+	return t.mainDiskNo
+}
+
+func (t *EndCentralDirectory) GetTotalEntries() uint16 {
+	return t.totalEntries
+}
+
+func (t *EndCentralDirectory) GetCentralDirectoryRelativeOffs() uint32 {
+	return t.centralDirectoryRelativeOffs
+}

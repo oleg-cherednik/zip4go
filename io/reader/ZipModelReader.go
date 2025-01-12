@@ -2,14 +2,13 @@ package reader
 
 import (
 	"errors"
-	"fmt"
 	"github.com/oleg-cherednik/zip4go/io/in/file/rnd"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/builder"
 )
 
 type ZipModelReader struct {
-	srcZip *model.SrcZip
-
+	srcZip              *model.SrcZip
 	endCentralDirectory *model.EndCentralDirectory
 	centralDirectory    *model.CentralDirectory
 	zip64               *model.Zip64
@@ -21,7 +20,12 @@ func NewZipModelReader(srcZip *model.SrcZip) *ZipModelReader {
 
 func (t *ZipModelReader) Read() *model.ZipModel {
 	t.ReadCentralData()
-	return &model.ZipModel{}
+
+	return builder.NewZipModelBuilder(
+		t.srcZip,
+		t.endCentralDirectory,
+		t.zip64,
+		t.centralDirectory).Build()
 }
 
 func (t *ZipModelReader) ReadCentralData() {
@@ -41,7 +45,7 @@ func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
 }
 
 func (t *ZipModelReader) readEndCentralDirectory(in rnd.RandomAccessDataInput) {
-	findEndCentralDirectorySignature(in)
+	t.findEndCentralDirectorySignature(in)
 	t.endCentralDirectory = NewEndCentralDirectoryReader().Read(in)
 
 	//if t.endCentralDirectory.GetTotalDisks() > 0 {
@@ -55,10 +59,15 @@ func (t *ZipModelReader) readZip64(in rnd.RandomAccessDataInput) {
 }
 
 func (t *ZipModelReader) readCentralDirectory(in rnd.RandomAccessDataInput) {
-	fmt.Println("readCentralDirectory...")
+	mainDiskNo := builder.GetMainDiskNo(t.endCentralDirectory, t.zip64)
+	relativeOffs := builder.GetCentralDirectoryRelativeOffs(t.endCentralDirectory, t.zip64)
+	totalEntries := builder.GetTotalEntries(t.endCentralDirectory, t.zip64)
+
+	in.SeekStart(t.srcZip.GetAbsOffs(mainDiskNo, relativeOffs))
+	t.centralDirectory = t.getCentralDirectoryReader(totalEntries).Read(in)
 }
 
-func findEndCentralDirectorySignature(in rnd.RandomAccessDataInput) {
+func (t *ZipModelReader) findEndCentralDirectorySignature(in rnd.RandomAccessDataInput) {
 	commentLength := model.MAX_COMMENT_SIZE
 	absOffs := in.Available() - model.ECD_MIN_SIZE
 
@@ -79,4 +88,12 @@ func findEndCentralDirectorySignature(in rnd.RandomAccessDataInput) {
 	}
 
 	panic(errors.New("SignatureNotFoundException"))
+}
+
+func (t *ZipModelReader) getCentralDirectoryReader(totalEntries uint64) *CentralDirectoryReader {
+	if t.zip64 != nil && t.zip64.IsCentralDirectoryEncrypted() {
+		panic(errors.New("encrypted central directory is not supported"))
+	}
+
+	return NewCentralDirectoryReader(totalEntries)
 }

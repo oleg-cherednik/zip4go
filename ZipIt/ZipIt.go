@@ -28,7 +28,7 @@ func (s ZipIt) Add(path string) {
 	srcZip := model.NewSrcZip(s.zip)
 	zipModel := reader.NewZipModelReader(srcZip).Read()
 	fmt.Println(zipModel)
-	fmt.Println("creating zip archive...")
+	fmt.Println("OK!")
 
 	//var archive *os.File
 	//

@@ -21,3 +21,19 @@ func NewZip64(
 		extensibleDataSector:       extensibleDataSector,
 	}
 }
+
+func (t *Zip64) GetEndCentralDirectoryLocator() *Zip64EndCentralDirectoryLocator {
+	return t.endCentralDirectoryLocator
+}
+
+func (t *Zip64) GetEndCentralDirectory() *Zip64EndCentralDirectory {
+	return t.endCentralDirectory
+}
+
+func (t *Zip64) GetExtensibleDataSector() *Zip64ExtensibleDataSector {
+	return t.extensibleDataSector
+}
+
+func (t *Zip64) IsCentralDirectoryEncrypted() bool {
+	return t.extensibleDataSector != nil
+}
