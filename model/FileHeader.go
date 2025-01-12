@@ -39,10 +39,6 @@ type FileHeader struct {
 	comment string
 }
 
-func NewFileHeader() *FileHeader {
-	return &FileHeader{compressionMethod: Store}
-}
-
 func (t *FileHeader) SetVersionMadeBy(versionMadeBy uint16) {
 	t.versionMadeBy = versionMadeBy
 }

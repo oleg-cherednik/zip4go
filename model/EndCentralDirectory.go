@@ -19,10 +19,6 @@ type EndCentralDirectory struct {
 	comment string
 }
 
-func NewEndCentralDirectory() *EndCentralDirectory {
-	return &EndCentralDirectory{}
-}
-
 func (t *EndCentralDirectory) SetTotalDisks(totalDisks uint16) {
 	t.totalDisks = totalDisks
 }

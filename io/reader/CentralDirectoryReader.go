@@ -14,8 +14,8 @@ func NewCentralDirectoryReader(totalEntries uint64) *CentralDirectoryReader {
 }
 
 func (t *CentralDirectoryReader) Read(in in.DataInput) *model.CentralDirectory {
-	cd := model.NewCentralDirectory()
+	cd := &model.CentralDirectory{}
 	cd.SetFileHeaders(NewFileHeaderReader(t.totalEntries).Read(in))
-	cd.SetDigitalSignature(NewDigitalSignatureReader().Read(in))
+	cd.SetDigitalSignature((&DigitalSignatureReader{}).Read(in))
 	return cd
 }

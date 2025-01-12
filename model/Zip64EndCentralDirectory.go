@@ -23,10 +23,6 @@ type Zip64EndCentralDirectory struct {
 	centralDirectoryRelativeOffs uint64
 }
 
-func NewZip64EndCentralDirectory() *Zip64EndCentralDirectory {
-	return &Zip64EndCentralDirectory{}
-}
-
 func (t *Zip64EndCentralDirectory) SetEndCentralDirectorySize(endCentralDirectorySize uint64) {
 	t.endCentralDirectorySize = endCentralDirectorySize
 }

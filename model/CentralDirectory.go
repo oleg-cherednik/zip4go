@@ -5,10 +5,6 @@ type CentralDirectory struct {
 	digitalSignature *DigitalSignature
 }
 
-func NewCentralDirectory() *CentralDirectory {
-	return &CentralDirectory{}
-}
-
 func (t *CentralDirectory) SetFileHeaders(fileHeaders []*FileHeader) {
 	t.fileHeaders = fileHeaders
 }

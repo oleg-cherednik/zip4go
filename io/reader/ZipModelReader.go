@@ -47,7 +47,7 @@ func (t *ZipModelReader) readCentralData(readCentralDirectory bool) {
 
 func (t *ZipModelReader) readEndCentralDirectory(in rnd.RandomAccessDataInput) {
 	t.findEndCentralDirectorySignature(in)
-	t.endCentralDirectory = NewEndCentralDirectoryReader().Read(in)
+	t.endCentralDirectory = (&EndCentralDirectoryReader{}).Read(in)
 
 	//if t.endCentralDirectory.GetTotalDisks() > 0 {
 	//	panic(errors.New("split zip is not supported"))

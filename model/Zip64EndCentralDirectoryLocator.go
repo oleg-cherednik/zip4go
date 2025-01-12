@@ -10,10 +10,6 @@ type Zip64EndCentralDirectoryLocator struct {
 	totalDisks uint32
 }
 
-func NewZip64EndCentralDirectoryLocator() *Zip64EndCentralDirectoryLocator {
-	return &Zip64EndCentralDirectoryLocator{}
-}
-
 func (t *Zip64EndCentralDirectoryLocator) SetMainDiskNo(mainDiskNo uint32) {
 	t.mainDiskNo = mainDiskNo
 }

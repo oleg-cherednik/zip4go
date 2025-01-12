@@ -10,14 +10,10 @@ import (
 
 type Zip64EndCentralDirectoryReader struct{}
 
-func NewZip64EndCentralDirectoryReader() *Zip64EndCentralDirectoryReader {
-	return &Zip64EndCentralDirectoryReader{}
-}
-
 func (t *Zip64EndCentralDirectoryReader) Read(in in.DataInput) *model.Zip64EndCentralDirectory {
 	t.checkSignature(in)
 
-	ecd := model.NewZip64EndCentralDirectory()
+	ecd := &model.Zip64EndCentralDirectory{}
 	ecd.SetEndCentralDirectorySize(in.ReadQword())
 	ecd.SetVersionMadeBy(in.ReadWord())
 	ecd.SetVersionToExtract(in.ReadWord())

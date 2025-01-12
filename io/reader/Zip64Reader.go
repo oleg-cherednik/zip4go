@@ -23,13 +23,13 @@ func (t *Zip64Reader) Read(in rnd.RandomAccessDataInput) *model.Zip64 {
 
 func (t *Zip64Reader) read(in rnd.RandomAccessDataInput, locatorOnly bool) *model.Zip64 {
 	if t.findCentralDirectoryLocatorSignature(in) {
-		locator := NewEndCentralDirectoryLocatorReader().Read(in)
+		locator := (&Zip64EndCentralDirectoryLocatorReader{}).Read(in)
 		var ecd *model.Zip64EndCentralDirectory
 		var eds *model.Zip64ExtensibleDataSector
 
 		if !locatorOnly {
 			t.findEndCentralDirectorySignature(locator, in)
-			ecd = NewZip64EndCentralDirectoryReader().Read(in)
+			ecd = (&Zip64EndCentralDirectoryReader{}).Read(in)
 			eds = t.readExtensibleDataSector(ecd, in)
 		}
 

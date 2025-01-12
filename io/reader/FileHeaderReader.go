@@ -30,7 +30,7 @@ func (t *FileHeaderReader) Read(in in.DataInput) []*model.FileHeader {
 func (t *FileHeaderReader) readFileHeader(in in.DataInput) *model.FileHeader {
 	t.checkSignature(in)
 
-	fileHeader := model.NewFileHeader()
+	fileHeader := &model.FileHeader{}
 	fileHeader.SetVersionMadeBy(in.ReadWord())
 	fileHeader.SetVersionToExtract(in.ReadWord())
 	fileHeader.SetGeneralPurposeFlag(model.NewGeneralPurposeFlag(in.ReadWord()))

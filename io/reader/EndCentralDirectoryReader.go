@@ -11,14 +11,10 @@ import (
 
 type EndCentralDirectoryReader struct{}
 
-func NewEndCentralDirectoryReader() *EndCentralDirectoryReader {
-	return &EndCentralDirectoryReader{}
-}
-
 func (t *EndCentralDirectoryReader) Read(in in.DataInput) *model.EndCentralDirectory {
 	t.checkSignature(in)
 
-	ecd := model.NewEndCentralDirectory()
+	ecd := &model.EndCentralDirectory{}
 	ecd.SetTotalDisks(in.ReadWord())
 	ecd.SetMainDiskNo(in.ReadWord())
 	ecd.SetDiskEntries(in.ReadWord())

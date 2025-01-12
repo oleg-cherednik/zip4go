@@ -7,10 +7,6 @@ import (
 
 type DigitalSignatureReader struct{}
 
-func NewDigitalSignatureReader() *DigitalSignatureReader {
-	return &DigitalSignatureReader{}
-}
-
 func (t *DigitalSignatureReader) Read(in in.DataInput) *model.DigitalSignature {
-	return model.NewDigitalSignature()
+	return &model.DigitalSignature{}
 }
