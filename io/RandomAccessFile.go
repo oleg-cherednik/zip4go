@@ -130,14 +130,16 @@ func (t *RandomAccessFile) ReadString(length int, charMap charmap.Charmap) strin
 	}
 
 	buf := make([]byte, length)
-	nowRead, err := charMap.NewDecoder().Reader(t.file).Read(buf)
-
-	if nowRead == 0 || err == io.EOF {
-		panic(io.EOF)
-	}
+	nowRead := t.Read(&buf, 0, cap(buf))
 
 	if nowRead < length {
 		buf = buf[0:nowRead]
+	}
+
+	buf, err := charMap.NewDecoder().Bytes(buf)
+
+	if err != nil {
+		panic(io.EOF)
 	}
 
 	return string(buf)

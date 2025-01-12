@@ -1,7 +1,7 @@
 package model
 
 type Zip64EndCentralDirectoryLocator struct {
-	// size:4 - signature (0x06054b50)
+	// size:4 - sig (0x06054b50)
 	// size:4 - number of the disk with the start of the model64 end of central directory
 	mainDiskNo uint32
 	// size:8 - relative offset of the Zip64.Zip64EndCentralDirectory

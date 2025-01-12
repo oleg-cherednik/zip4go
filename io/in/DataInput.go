@@ -14,5 +14,6 @@ type DataInput interface {
 	ReadQword() uint64
 	ReadString(length int, charMap charmap.Charmap) string
 	ReadBytes(total int) *[]byte
+	Skip(bytes int64) int64
 	ReadDwordSignature() uint32
 }

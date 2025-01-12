@@ -5,6 +5,7 @@ import (
 	"github.com/oleg-cherednik/zip4go/io/in/file/rnd"
 	"github.com/oleg-cherednik/zip4go/model"
 	"github.com/oleg-cherednik/zip4go/model/builder"
+	"github.com/oleg-cherednik/zip4go/model/sig"
 )
 
 type ZipModelReader struct {
@@ -77,7 +78,7 @@ func (t *ZipModelReader) findEndCentralDirectorySignature(in rnd.RandomAccessDat
 		absOffs -= 1
 		commentLength -= 1
 
-		if in.IsDwordSignature(model.ECD_SIG) {
+		if in.IsDwordSignature(sig.EndCentralDirectory) {
 			in.Mark(model.MARKER_END_CENTRAL_DIRECTORY)
 			return
 		}

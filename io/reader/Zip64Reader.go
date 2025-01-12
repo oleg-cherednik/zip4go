@@ -5,6 +5,7 @@ import (
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/io/in/file/rnd"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/sig"
 	"strconv"
 )
 
@@ -54,14 +55,14 @@ func (t *Zip64Reader) findCentralDirectoryLocatorSignature(in rnd.RandomAccessDa
 	}
 
 	in.Backward(model.ZIP64_ECDL_SIZE)
-	return in.IsDwordSignature(model.ZIP64_ECDL_SIG)
+	return in.IsDwordSignature(sig.Zip64EndCentralDirectoryLocator)
 }
 
 func (t *Zip64Reader) findEndCentralDirectorySignature(locator *model.Zip64EndCentralDirectoryLocator, in rnd.RandomAccessDataInput) {
 	in.SeekStart(t.srcZip.GetAbsOffs(locator.GetMainDiskNo(), locator.GetEndCentralDirectoryRelativeOffs()))
 	absOffs := in.GetAbsOffs()
 
-	if !in.IsDwordSignature(model.ZIP64_ECD_SIG) {
+	if !in.IsDwordSignature(sig.Zip64EndCentralDirectory) {
 		panic(errors.New("SignatureNotFoundException: " + strconv.FormatInt(absOffs, 16)))
 	}
 }

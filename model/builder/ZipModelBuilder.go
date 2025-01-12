@@ -50,5 +50,5 @@ func GetTotalEntries(endCentralDirectory *model.EndCentralDirectory, zip64 *mode
 		return uint64(endCentralDirectory.GetTotalEntries())
 	}
 
-	return zip64.GetEndCentralDirectory().GetCentralDirectoryRelativeOffs()
+	return zip64.GetEndCentralDirectory().GetTotalEntries()
 }

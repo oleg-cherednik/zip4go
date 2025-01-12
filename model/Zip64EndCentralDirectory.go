@@ -2,7 +2,7 @@ package model
 
 type Zip64EndCentralDirectory struct {
 
-	// size:4 - signature (0x06064b50)
+	// size:4 - sig (0x06064b50)
 	// size:8 - directory record (n)
 	endCentralDirectorySize uint64
 	// size:2 - version made by

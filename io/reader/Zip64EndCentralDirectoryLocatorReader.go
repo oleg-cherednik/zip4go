@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/sig"
 	"strconv"
 )
 
@@ -31,7 +32,7 @@ func (t *Zip64EndCentralDirectoryLocatorReader) Read(in in.DataInput) *model.Zip
 func (t *Zip64EndCentralDirectoryLocatorReader) checkSignature(in in.DataInput) {
 	absOffs := in.GetAbsOffs()
 
-	if in.ReadDwordSignature() != model.ZIP64_ECDL_SIG {
+	if in.ReadDwordSignature() != sig.Zip64EndCentralDirectoryLocator {
 		panic(errors.New("SignatureNotFoundException: " + strconv.FormatInt(absOffs, 16)))
 	}
 }

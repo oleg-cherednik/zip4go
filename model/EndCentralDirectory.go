@@ -1,7 +1,7 @@
 package model
 
 type EndCentralDirectory struct {
-	// size:4 - signature (0x06054b50)
+	// size:4 - sig (0x06054b50)
 	// size:2 - number of the disk (=0 - single zip; >0 - split zip (e.g. 5 means 6 total parts))
 	totalDisks uint16
 	// size:2 - number of the disk with the central directory (single zip - 0; split zip - e.g. 5 means 6th part)

@@ -18,7 +18,7 @@ func main() {
 
 	// os.Remove(zip)
 
-	ZipIt.Zip(zip).Add(fileBentley)
+	ZipIt.Zip(zip64).Add(fileBentley)
 	//ZipIt.Zip(zip).Add(fileFerrari)
 	//ZipIt.Zip(zip).Add(fileWiesmann)
 	//zipIt := ZipIt.Zip(zip)

@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/sig"
 	"golang.org/x/text/encoding/charmap"
 	"strconv"
 )
@@ -37,7 +38,7 @@ func (t *EndCentralDirectoryReader) readComment(in in.DataInput) string {
 func (t *EndCentralDirectoryReader) checkSignature(in in.DataInput) {
 	absOffs := in.GetAbsOffs()
 
-	if in.ReadDwordSignature() != model.ECD_SIG {
+	if in.ReadDwordSignature() != sig.EndCentralDirectory {
 		panic(errors.New("SignatureNotFoundException: " + strconv.FormatInt(absOffs, 16)))
 	}
 }

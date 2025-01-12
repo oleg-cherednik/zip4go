@@ -85,6 +85,10 @@ func (t *SolidRandomAccessDataInput) ReadBytes(total int) *[]byte {
 	return &buf
 }
 
+func (t *SolidRandomAccessDataInput) Skip(bytes int64) int64 {
+	return t.in.SkipBytes(bytes)
+}
+
 func (t *SolidRandomAccessDataInput) ReadDwordSignature() uint32 {
 	return t.ReadDword()
 }
