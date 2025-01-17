@@ -2,9 +2,7 @@ package SlidingDictionarySize
 
 import "github.com/oleg-cherednik/zip4go/model/enum"
 
-type SlidingDictionarySize struct {
-	*enum.TitleEnum
-}
+type SlidingDictionarySize = enum.TitleEnum
 
 var (
 	Sd4k = newSlidingDictionarySize("Sd4k", "4K")
@@ -12,6 +10,5 @@ var (
 )
 
 func newSlidingDictionarySize(name string, title string) *SlidingDictionarySize {
-	p := enum.NewTitleEnum(name, title)
-	return &SlidingDictionarySize{p}
+	return enum.NewTitleEnum(name, title)
 }

@@ -23,3 +23,7 @@ const (
 func IsBitSet(val uint, bits uint) bool {
 	return (val & bits) == bits
 }
+
+func IsBitClear(val uint, bits uint) bool {
+	return (val & bits) == 0
+}

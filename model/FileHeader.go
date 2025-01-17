@@ -26,9 +26,9 @@ type FileHeader struct {
 	// size:2 - disk number start
 	diskNo uint16
 	// size:2 - internal file attributes
-	internalFileAttributes uint16
+	internalFileAttributes *InternalFileAttributes
 	// size:4 - external file attributes
-	externalFileAttributes uint32
+	externalFileAttributes *ExternalFileAttributes
 	// size:4 - relative offset of local header
 	localFileHeaderRelativeOffs uint32
 	// size:n - file name
@@ -79,11 +79,11 @@ func (t *FileHeader) SetDiskNo(diskNo uint16) {
 	t.diskNo = diskNo
 }
 
-func (t *FileHeader) SetInternalFileAttributes(internalFileAttributes uint16) {
+func (t *FileHeader) SetInternalFileAttributes(internalFileAttributes *InternalFileAttributes) {
 	t.internalFileAttributes = internalFileAttributes
 }
 
-func (t *FileHeader) SetExternalFileAttributes(externalFileAttributes uint32) {
+func (t *FileHeader) SetExternalFileAttributes(externalFileAttributes *ExternalFileAttributes) {
 	t.externalFileAttributes = externalFileAttributes
 }
 

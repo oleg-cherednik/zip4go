@@ -1,9 +1,9 @@
 package model
 
 import (
-	EnumCompressionLevel "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
-	EnumShannonFanoTreesNumber "github.com/oleg-cherednik/zip4go/model/enum/ShannonFanoTreesNumber"
-	EnumSlidingDictionarySize "github.com/oleg-cherednik/zip4go/model/enum/SlidingDictionarySize"
+	CompressionLevelEnum "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
+	ShannonFanoTreesNumberEnum "github.com/oleg-cherednik/zip4go/model/enum/ShannonFanoTreesNumber"
+	SlidingDictionarySizeEnum "github.com/oleg-cherednik/zip4go/model/enum/SlidingDictionarySize"
 	"github.com/oleg-cherednik/zip4go/util/Bit"
 )
 
@@ -32,33 +32,30 @@ func NewGeneralPurposeFlag(data uint) *GeneralPurposeFlag {
 }
 
 func getCompressionLevel(data uint) *CompressionLevel {
-	if Bit.IsBitSet(data, Bit.Bit1|Bit.Bit2) {
-		return EnumCompressionLevel.SuperFast
+	switch {
+	case Bit.IsBitSet(data, Bit.Bit1|Bit.Bit2):
+		return CompressionLevelEnum.SuperFast
+	case Bit.IsBitSet(data, Bit.Bit2):
+		return CompressionLevelEnum.Fast
+	case Bit.IsBitSet(data, Bit.Bit1):
+		return CompressionLevelEnum.Maximum
+	default:
+		return CompressionLevelEnum.Normal
 	}
-
-	if Bit.IsBitSet(data, Bit.Bit2) {
-		return EnumCompressionLevel.Fast
-	}
-
-	if Bit.IsBitSet(data, Bit.Bit1) {
-		return EnumCompressionLevel.Maximum
-	}
-
-	return EnumCompressionLevel.Normal
 }
 
 func getSlidingDictionarySize(data uint) *SlidingDictionarySize {
 	if Bit.IsBitSet(data, Bit.Bit1) {
-		return EnumSlidingDictionarySize.Sd8k
+		return SlidingDictionarySizeEnum.Sd8k
 	}
 
-	return EnumSlidingDictionarySize.Sd4k
+	return SlidingDictionarySizeEnum.Sd4k
 }
 
 func getShannonFanoTreesNumber(data uint) *ShannonFanoTreesNumber {
 	if Bit.IsBitSet(data, Bit.Bit2) {
-		return EnumShannonFanoTreesNumber.Three
+		return ShannonFanoTreesNumberEnum.Three
 	}
 
-	return EnumShannonFanoTreesNumber.Two
+	return ShannonFanoTreesNumberEnum.Two
 }

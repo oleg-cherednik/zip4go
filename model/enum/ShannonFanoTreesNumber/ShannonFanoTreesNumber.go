@@ -2,9 +2,7 @@ package ShannonFanoTreesNumber
 
 import "github.com/oleg-cherednik/zip4go/model/enum"
 
-type ShannonFanoTreesNumber struct {
-	*enum.TitleEnum
-}
+type ShannonFanoTreesNumber = enum.TitleEnum
 
 var (
 	Two   = newShannonFanoTreesNumber("Two", "2")
@@ -12,6 +10,5 @@ var (
 )
 
 func newShannonFanoTreesNumber(name string, title string) *ShannonFanoTreesNumber {
-	p := enum.NewTitleEnum(name, title)
-	return &ShannonFanoTreesNumber{p}
+	return enum.NewTitleEnum(name, title)
 }

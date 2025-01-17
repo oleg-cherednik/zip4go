@@ -6,9 +6,7 @@ import (
 	"strconv"
 )
 
-type CompressionMethod struct {
-	*enum.CodeTitleEnum
-}
+type CompressionMethod = enum.CodeTitleEnum
 
 var (
 	Store              = newCompressionMethod("Store", 0, "none (stored)")
@@ -39,10 +37,9 @@ var (
 )
 
 func newCompressionMethod(name string, code uint, title string) *CompressionMethod {
-	p := enum.NewCodeTitleEnum(name, code, title)
-	compressionMethod := CompressionMethod{p}
-	values[code] = &compressionMethod
-	return &compressionMethod
+	compressionMethod := enum.NewCodeTitleEnum(name, code, title)
+	values[code] = compressionMethod
+	return compressionMethod
 }
 
 func ParseCode(code uint) *CompressionMethod {

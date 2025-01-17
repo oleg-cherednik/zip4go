@@ -1,11 +1,12 @@
 package model
 
 import (
-	EnumCompressionLevel "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
-	EnumCompressionMethod "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
-	EnumFileSystem "github.com/oleg-cherednik/zip4go/model/enum/FileSystem"
-	EnumShannonFanoTreesNumber "github.com/oleg-cherednik/zip4go/model/enum/ShannonFanoTreesNumber"
-	EnumSlidingDictionarySize "github.com/oleg-cherednik/zip4go/model/enum/SlidingDictionarySize"
+	ApparentFileTypeEnum "github.com/oleg-cherednik/zip4go/model/enum/ApparentFileType"
+	CompressionLevelEnum "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
+	CompressionMethodEnum "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
+	FileSystemEnum "github.com/oleg-cherednik/zip4go/model/enum/FileSystem"
+	ShannonFanoTreesNumberEnum "github.com/oleg-cherednik/zip4go/model/enum/ShannonFanoTreesNumber"
+	SlidingDictionarySizeEnum "github.com/oleg-cherednik/zip4go/model/enum/SlidingDictionarySize"
 )
 
 const (
@@ -17,8 +18,9 @@ const (
 	MARKER_END_CENTRAL_DIRECTORY = "end_central_directory"
 )
 
-type CompressionLevel = EnumCompressionLevel.CompressionLevel
-type CompressionMethod = EnumCompressionMethod.CompressionMethod
-type FileSystem = EnumFileSystem.FileSystem
-type ShannonFanoTreesNumber = EnumShannonFanoTreesNumber.ShannonFanoTreesNumber
-type SlidingDictionarySize = EnumSlidingDictionarySize.SlidingDictionarySize
+type ApparentFileType = ApparentFileTypeEnum.ApparentFileType
+type CompressionLevel = CompressionLevelEnum.CompressionLevel
+type CompressionMethod = CompressionMethodEnum.CompressionMethod
+type FileSystem = FileSystemEnum.FileSystem
+type ShannonFanoTreesNumber = ShannonFanoTreesNumberEnum.ShannonFanoTreesNumber
+type SlidingDictionarySize = SlidingDictionarySizeEnum.SlidingDictionarySize

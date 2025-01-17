@@ -4,7 +4,7 @@ import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
-	"github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
+	CompressionMethodEnum "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
 	"github.com/oleg-cherednik/zip4go/model/sig"
 	"golang.org/x/text/encoding/charmap"
 	"strconv"
@@ -35,7 +35,7 @@ func (t *FileHeaderReader) readFileHeader(in in.DataInput) *model.FileHeader {
 	fileHeader.SetVersionMadeBy(model.NewVersion(uint(in.ReadWord())))
 	fileHeader.SetVersionToExtract(model.NewVersion(uint(in.ReadWord())))
 	fileHeader.SetGeneralPurposeFlag(model.NewGeneralPurposeFlag(uint(in.ReadWord())))
-	fileHeader.SetCompressionMethod(CompressionMethod.ParseCode(uint(in.ReadWord())))
+	fileHeader.SetCompressionMethod(CompressionMethodEnum.ParseCode(uint(in.ReadWord())))
 	fileHeader.SetLastModifiedTime(in.ReadDword())
 	fileHeader.SetCrc32(in.ReadDword())
 	fileHeader.SetCompressedSize(in.ReadDword())
@@ -47,8 +47,8 @@ func (t *FileHeaderReader) readFileHeader(in in.DataInput) *model.FileHeader {
 
 	fileHeader.SetCommentLength(in.ReadWord())
 	fileHeader.SetDiskNo(in.ReadWord())
-	fileHeader.SetInternalFileAttributes(in.ReadWord())
-	fileHeader.SetExternalFileAttributes(in.ReadDword())
+	fileHeader.SetInternalFileAttributes(readInternalFileAttributes(in))
+	fileHeader.SetExternalFileAttributes(readExternalFileAttributes(in))
 	fileHeader.SetLocalFileHeaderRelativeOffs(in.ReadDword())
 	fileHeader.SetFileName(in.ReadString(int(fileNameLength), charMap))
 	fileHeader.SetExtraField(NewExtraFieldReader(int64(extraFieldLength)).Read(in))
@@ -63,4 +63,12 @@ func (t *FileHeaderReader) checkSignature(in in.DataInput) {
 	if in.ReadDwordSignature() != sig.FileHeader {
 		panic(errors.New("SignatureNotFoundException: " + strconv.FormatInt(absOffs, 16)))
 	}
+}
+
+func readInternalFileAttributes(in in.DataInput) *model.InternalFileAttributes {
+	return model.NewInternalFileAttributes(in.ReadBytes(model.InternalFileAttributesSize))
+}
+
+func readExternalFileAttributes(in in.DataInput) *model.ExternalFileAttributes {
+	return model.NewExternalFileAttributes(in.ReadBytes(model.ExternalFileAttributesSize))
 }

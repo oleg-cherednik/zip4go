@@ -4,9 +4,7 @@ import (
 	"github.com/oleg-cherednik/zip4go/model/enum"
 )
 
-type CompressionLevel struct {
-	*enum.CodeTitleEnum
-}
+type CompressionLevel = enum.CodeTitleEnum
 
 var (
 	SuperFast = newCompressionLevel("SuperFast", 0, "superfast")
@@ -18,8 +16,7 @@ var (
 )
 
 func newCompressionLevel(name string, code uint, title string) *CompressionLevel {
-	p := enum.NewCodeTitleEnum(name, code, title)
-	compressionLevel := CompressionLevel{p}
-	values[code] = &compressionLevel
-	return &compressionLevel
+	compressionLevel := enum.NewCodeTitleEnum(name, code, title)
+	values[code] = compressionLevel
+	return compressionLevel
 }

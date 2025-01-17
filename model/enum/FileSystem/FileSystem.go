@@ -2,9 +2,7 @@ package FileSystem
 
 import "github.com/oleg-cherednik/zip4go/model/enum"
 
-type FileSystem struct {
-	*enum.CodeTitleEnum
-}
+type FileSystem = enum.CodeTitleEnum
 
 var (
 	MsDosOs2NtFat = newFileSystem("MsDosOs2NtFat", 0, "MS-DOS, OS/2, NT FAT")
@@ -33,10 +31,9 @@ var (
 )
 
 func newFileSystem(name string, code uint, title string) *FileSystem {
-	p := enum.NewCodeTitleEnum(name, code, title)
-	fileSystem := FileSystem{p}
-	values[code] = &fileSystem
-	return &fileSystem
+	fileSystem := enum.NewCodeTitleEnum(name, code, title)
+	values[code] = fileSystem
+	return fileSystem
 }
 
 func ParseCode(code uint) *FileSystem {

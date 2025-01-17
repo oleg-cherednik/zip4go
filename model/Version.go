@@ -1,6 +1,6 @@
 package model
 
-import EnumFileSystem "github.com/oleg-cherednik/zip4go/model/enum/FileSystem"
+import FileSystemEnum "github.com/oleg-cherednik/zip4go/model/enum/FileSystem"
 
 type Version struct {
 	fileSystem              *FileSystem
@@ -8,7 +8,7 @@ type Version struct {
 }
 
 func NewVersion(data uint) *Version {
-	fileSystem := EnumFileSystem.ParseCode(data >> 8)
+	fileSystem := FileSystemEnum.ParseCode(data >> 8)
 	zipSpecificationVersion := data & 0xFF
 	return &Version{fileSystem: fileSystem, zipSpecificationVersion: zipSpecificationVersion}
 }
