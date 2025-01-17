@@ -4,6 +4,8 @@ import (
 	EnumCompressionLevel "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
 	EnumCompressionMethod "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
 	EnumFileSystem "github.com/oleg-cherednik/zip4go/model/enum/FileSystem"
+	EnumShannonFanoTreesNumber "github.com/oleg-cherednik/zip4go/model/enum/ShannonFanoTreesNumber"
+	EnumSlidingDictionarySize "github.com/oleg-cherednik/zip4go/model/enum/SlidingDictionarySize"
 )
 
 const (
@@ -18,3 +20,5 @@ const (
 type CompressionLevel = EnumCompressionLevel.CompressionLevel
 type CompressionMethod = EnumCompressionMethod.CompressionMethod
 type FileSystem = EnumFileSystem.FileSystem
+type ShannonFanoTreesNumber = EnumShannonFanoTreesNumber.ShannonFanoTreesNumber
+type SlidingDictionarySize = EnumSlidingDictionarySize.SlidingDictionarySize
