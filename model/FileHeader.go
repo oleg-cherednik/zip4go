@@ -3,9 +3,9 @@ package model
 type FileHeader struct {
 	// size:4 - signature (0x02014b50)
 	// size:2 - version made by
-	versionMadeBy uint16
+	versionMadeBy *Version
 	// size:2 - version needed to extractEntries
-	versionToExtract uint16
+	versionToExtract *Version
 	// size:2 - general purpose bit flag
 	generalPurposeFlag *GeneralPurposeFlag
 	// size:2 - compression method
@@ -39,11 +39,11 @@ type FileHeader struct {
 	comment string
 }
 
-func (t *FileHeader) SetVersionMadeBy(versionMadeBy uint16) {
+func (t *FileHeader) SetVersionMadeBy(versionMadeBy *Version) {
 	t.versionMadeBy = versionMadeBy
 }
 
-func (t *FileHeader) SetVersionToExtract(versionToExtract uint16) {
+func (t *FileHeader) SetVersionToExtract(versionToExtract *Version) {
 	t.versionToExtract = versionToExtract
 }
 

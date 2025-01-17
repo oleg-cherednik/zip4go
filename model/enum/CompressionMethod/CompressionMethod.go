@@ -61,12 +61,12 @@ func (t *CompressionMethod) String() string {
 	return t.GetName()
 }
 
-func ParseCode(code uint16) *CompressionMethod {
-	compressionMethod, found := values[uint(code)]
+func ParseCode(code uint) *CompressionMethod {
+	value, found := values[code]
 
 	if found {
-		return compressionMethod
+		return value
 	}
 
-	panic(errors.New("UnknownCompressionMethod: " + strconv.Itoa(int(code))))
+	panic(errors.New("Unknown CompressionMethod: " + strconv.Itoa(int(code))))
 }

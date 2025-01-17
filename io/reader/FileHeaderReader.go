@@ -32,10 +32,10 @@ func (t *FileHeaderReader) readFileHeader(in in.DataInput) *model.FileHeader {
 	t.checkSignature(in)
 
 	fileHeader := &model.FileHeader{}
-	fileHeader.SetVersionMadeBy(in.ReadWord())
-	fileHeader.SetVersionToExtract(in.ReadWord())
-	fileHeader.SetGeneralPurposeFlag(model.NewGeneralPurposeFlag(in.ReadWord()))
-	fileHeader.SetCompressionMethod(CompressionMethod.ParseCode(in.ReadWord()))
+	fileHeader.SetVersionMadeBy(model.NewVersion(uint(in.ReadWord())))
+	fileHeader.SetVersionToExtract(model.NewVersion(uint(in.ReadWord())))
+	fileHeader.SetGeneralPurposeFlag(model.NewGeneralPurposeFlag(uint(in.ReadWord())))
+	fileHeader.SetCompressionMethod(CompressionMethod.ParseCode(uint(in.ReadWord())))
 	fileHeader.SetLastModifiedTime(in.ReadDword())
 	fileHeader.SetCrc32(in.ReadDword())
 	fileHeader.SetCompressedSize(in.ReadDword())

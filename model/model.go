@@ -1,6 +1,10 @@
 package model
 
-import EnumCompressionMethod "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
+import (
+	EnumCompressionLevel "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
+	EnumCompressionMethod "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
+	EnumFileSystem "github.com/oleg-cherednik/zip4go/model/enum/FileSystem"
+)
 
 const (
 	MAX_COMMENT_SIZE = 0xFFFF
@@ -11,4 +15,6 @@ const (
 	MARKER_END_CENTRAL_DIRECTORY = "end_central_directory"
 )
 
+type CompressionLevel = EnumCompressionLevel.CompressionLevel
 type CompressionMethod = EnumCompressionMethod.CompressionMethod
+type FileSystem = EnumFileSystem.FileSystem
