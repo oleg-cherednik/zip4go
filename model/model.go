@@ -1,5 +1,7 @@
 package model
 
+import EnumCompressionMethod "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
+
 const (
 	MAX_COMMENT_SIZE = 0xFFFF
 	ECD_MIN_SIZE     = 4 + 2 + 2 + 2 + 2 + 4 + 4 + 2
@@ -8,3 +10,5 @@ const (
 
 	MARKER_END_CENTRAL_DIRECTORY = "end_central_directory"
 )
+
+type CompressionMethod = EnumCompressionMethod.CompressionMethod

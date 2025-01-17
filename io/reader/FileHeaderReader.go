@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
 	"github.com/oleg-cherednik/zip4go/model/sig"
 	"golang.org/x/text/encoding/charmap"
 	"strconv"
@@ -34,7 +35,7 @@ func (t *FileHeaderReader) readFileHeader(in in.DataInput) *model.FileHeader {
 	fileHeader.SetVersionMadeBy(in.ReadWord())
 	fileHeader.SetVersionToExtract(in.ReadWord())
 	fileHeader.SetGeneralPurposeFlag(model.NewGeneralPurposeFlag(in.ReadWord()))
-	fileHeader.SetCompressionMethod(in.ReadWord())
+	fileHeader.SetCompressionMethod(CompressionMethod.ParseCode(in.ReadWord()))
 	fileHeader.SetLastModifiedTime(in.ReadDword())
 	fileHeader.SetCrc32(in.ReadDword())
 	fileHeader.SetCompressedSize(in.ReadDword())

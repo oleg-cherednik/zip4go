@@ -18,6 +18,13 @@ func main() {
 
 	// os.Remove(zip)
 
+	//compressionMethod := CompressionMethod.Deflate
+	//
+	//fmt.Println(compressionMethod)
+	//fmt.Println(compressionMethod.GetName())
+	//fmt.Println(compressionMethod.GetTitle())
+	//fmt.Println(compressionMethod.GetCode())
+
 	ZipIt.Zip(zip64).Add(fileBentley)
 	//ZipIt.Zip(zip).Add(fileFerrari)
 	//ZipIt.Zip(zip).Add(fileWiesmann)

@@ -9,7 +9,7 @@ type FileHeader struct {
 	// size:2 - general purpose bit flag
 	generalPurposeFlag *GeneralPurposeFlag
 	// size:2 - compression method
-	compressionMethod uint16
+	compressionMethod *CompressionMethod
 	// size:2 - last mod file time
 	// size:2 - last mod file date
 	lastModifiedTime uint32
@@ -51,7 +51,7 @@ func (t *FileHeader) SetGeneralPurposeFlag(generalPurposeFlag *GeneralPurposeFla
 	t.generalPurposeFlag = generalPurposeFlag
 }
 
-func (t *FileHeader) SetCompressionMethod(compressionMethod uint16) {
+func (t *FileHeader) SetCompressionMethod(compressionMethod *CompressionMethod) {
 	t.compressionMethod = compressionMethod
 }
 
