@@ -1,4 +1,9 @@
-package model
+package zip64
+
+const (
+	LimitWord  = 0xFFFF
+	LimitDword = 0xFFF_FFF
+)
 
 type Zip64 struct {
 	endCentralDirectoryLocator *Zip64EndCentralDirectoryLocator

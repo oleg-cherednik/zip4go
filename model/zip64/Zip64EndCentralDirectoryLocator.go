@@ -1,4 +1,4 @@
-package model
+package zip64
 
 type Zip64EndCentralDirectoryLocator struct {
 	// size:4 - sig (0x06054b50)

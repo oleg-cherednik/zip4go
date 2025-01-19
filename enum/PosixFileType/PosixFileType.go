@@ -1,7 +1,7 @@
 package PosixFileType
 
 import (
-	"github.com/oleg-cherednik/zip4go/model/enum"
+	"github.com/oleg-cherednik/zip4go/enum"
 	"github.com/oleg-cherednik/zip4go/util/Bit"
 )
 

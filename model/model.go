@@ -1,12 +1,13 @@
 package model
 
 import (
-	ApparentFileTypeEnum "github.com/oleg-cherednik/zip4go/model/enum/ApparentFileType"
-	CompressionLevelEnum "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
-	CompressionMethodEnum "github.com/oleg-cherednik/zip4go/model/enum/CompressionMethod"
-	FileSystemEnum "github.com/oleg-cherednik/zip4go/model/enum/FileSystem"
-	ShannonFanoTreesNumberEnum "github.com/oleg-cherednik/zip4go/model/enum/ShannonFanoTreesNumber"
-	SlidingDictionarySizeEnum "github.com/oleg-cherednik/zip4go/model/enum/SlidingDictionarySize"
+	AesVersionEnum "github.com/oleg-cherednik/zip4go/enum/AesVersion"
+	ApparentFileTypeEnum "github.com/oleg-cherednik/zip4go/enum/ApparentFileType"
+	CompressionLevelEnum "github.com/oleg-cherednik/zip4go/enum/CompressionLevel"
+	CompressionMethodEnum "github.com/oleg-cherednik/zip4go/enum/CompressionMethod"
+	FileSystemEnum "github.com/oleg-cherednik/zip4go/enum/FileSystem"
+	ShannonFanoTreesNumberEnum "github.com/oleg-cherednik/zip4go/enum/ShannonFanoTreesNumber"
+	SlidingDictionarySizeEnum "github.com/oleg-cherednik/zip4go/enum/SlidingDictionarySize"
 )
 
 const (
@@ -16,8 +17,13 @@ const (
 	ZIP64_ECD_SIZE   = 2 + 2 + 4 + 4 + 8 + 8 + 8 + 8
 
 	MARKER_END_CENTRAL_DIRECTORY = "end_central_directory"
+
+	MaxEntrySize           = 0xFFF_FFF //zip64.LimitDword
+	MaxLocalFileHeaderOffs = 0xFFF_FFF //zip64.LimitDword
+	MaxTotalDisks          = 0xFFFF    //zip64.LimitWord
 )
 
+type AesVersion = AesVersionEnum.AesVersion
 type ApparentFileType = ApparentFileTypeEnum.ApparentFileType
 type CompressionLevel = CompressionLevelEnum.CompressionLevel
 type CompressionMethod = CompressionMethodEnum.CompressionMethod

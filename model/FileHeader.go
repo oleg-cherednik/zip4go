@@ -103,6 +103,22 @@ func (t *FileHeader) SetComment(comment string) {
 	t.comment = comment
 }
 
+func (t *FileHeader) GetCompressedSize() uint32 {
+	return t.compressedSize
+}
+
+func (t *FileHeader) GetUncompressedSize() uint32 {
+	return t.uncompressedSize
+}
+
 func (t *FileHeader) GetCommentLength() uint16 {
 	return t.commentLength
+}
+
+func (t *FileHeader) GetDiskNo() uint16 {
+	return t.diskNo
+}
+
+func (t *FileHeader) GetLocalFileHeaderRelativeOffs() uint32 {
+	return t.localFileHeaderRelativeOffs
 }

@@ -1,6 +1,8 @@
 package FileSystem
 
-import "github.com/oleg-cherednik/zip4go/model/enum"
+import (
+	"github.com/oleg-cherednik/zip4go/enum"
+)
 
 type FileSystem = enum.CodeTitleEnum
 
@@ -27,16 +29,16 @@ var (
 	MacOsx        = newFileSystem("MacOsx", 19, "Mac OS X")
 	Unknown       = newFileSystem("Unknown", 255, "unknown")
 
-	values = map[uint]*FileSystem{}
+	values = map[int]*FileSystem{}
 )
 
-func newFileSystem(name string, code uint, title string) *FileSystem {
+func newFileSystem(name string, code int, title string) *FileSystem {
 	fileSystem := enum.NewCodeTitleEnum(name, code, title)
 	values[code] = fileSystem
 	return fileSystem
 }
 
-func ParseCode(code uint) *FileSystem {
+func ParseCode(code int) *FileSystem {
 	value, found := values[code]
 
 	if found {

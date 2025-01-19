@@ -1,9 +1,9 @@
 package model
 
 import (
-	CompressionLevelEnum "github.com/oleg-cherednik/zip4go/model/enum/CompressionLevel"
-	ShannonFanoTreesNumberEnum "github.com/oleg-cherednik/zip4go/model/enum/ShannonFanoTreesNumber"
-	SlidingDictionarySizeEnum "github.com/oleg-cherednik/zip4go/model/enum/SlidingDictionarySize"
+	CompressionLevelEnum "github.com/oleg-cherednik/zip4go/enum/CompressionLevel"
+	ShannonFanoTreesNumberEnum "github.com/oleg-cherednik/zip4go/enum/ShannonFanoTreesNumber"
+	SlidingDictionarySizeEnum "github.com/oleg-cherednik/zip4go/enum/SlidingDictionarySize"
 	"github.com/oleg-cherednik/zip4go/util/Bit"
 )
 

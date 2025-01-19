@@ -1,6 +1,8 @@
 package ShannonFanoTreesNumber
 
-import "github.com/oleg-cherednik/zip4go/model/enum"
+import (
+	"github.com/oleg-cherednik/zip4go/enum"
+)
 
 type ShannonFanoTreesNumber = enum.TitleEnum
 

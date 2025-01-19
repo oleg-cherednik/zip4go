@@ -3,17 +3,17 @@ package reader
 import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/io/in"
-	"github.com/oleg-cherednik/zip4go/model"
 	"github.com/oleg-cherednik/zip4go/model/sig"
+	"github.com/oleg-cherednik/zip4go/model/zip64"
 	"strconv"
 )
 
 type Zip64EndCentralDirectoryLocatorReader struct{}
 
-func (t *Zip64EndCentralDirectoryLocatorReader) Read(in in.DataInput) *model.Zip64EndCentralDirectoryLocator {
+func (t *Zip64EndCentralDirectoryLocatorReader) Read(in in.DataInput) *zip64.Zip64EndCentralDirectoryLocator {
 	t.checkSignature(in)
 
-	ecdl := &model.Zip64EndCentralDirectoryLocator{}
+	ecdl := &zip64.Zip64EndCentralDirectoryLocator{}
 	ecdl.SetMainDiskNo(in.ReadDword())
 	ecdl.SetEndCentralDirectoryRelativeOffs(in.ReadQword())
 	ecdl.SetTotalDisks(in.ReadDword())

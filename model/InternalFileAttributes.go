@@ -1,7 +1,7 @@
 package model
 
 import (
-	EnumApparentFileType "github.com/oleg-cherednik/zip4go/model/enum/ApparentFileType"
+	EnumApparentFileType "github.com/oleg-cherednik/zip4go/enum/ApparentFileType"
 	"github.com/oleg-cherednik/zip4go/util/Bit"
 )
 

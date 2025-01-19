@@ -6,13 +6,14 @@ import (
 	"github.com/oleg-cherednik/zip4go/model"
 	"github.com/oleg-cherednik/zip4go/model/builder"
 	"github.com/oleg-cherednik/zip4go/model/sig"
+	"github.com/oleg-cherednik/zip4go/model/zip64"
 )
 
 type ZipModelReader struct {
 	srcZip              *model.SrcZip
 	endCentralDirectory *model.EndCentralDirectory
 	centralDirectory    *model.CentralDirectory
-	zip64               *model.Zip64
+	zip64               *zip64.Zip64
 }
 
 func NewZipModelReader(srcZip *model.SrcZip) *ZipModelReader {

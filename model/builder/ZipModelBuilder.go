@@ -1,11 +1,14 @@
 package builder
 
-import "github.com/oleg-cherednik/zip4go/model"
+import (
+	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/zip64"
+)
 
 type ZipModelBuilder struct {
 	srcZip              *model.SrcZip
 	endCentralDirectory *model.EndCentralDirectory
-	zip64               *model.Zip64
+	zip64               *zip64.Zip64
 	centralDirectory    *model.CentralDirectory
 	//charsetCustomizer
 	//alt bool
@@ -14,7 +17,7 @@ type ZipModelBuilder struct {
 func NewZipModelBuilder(
 	srcZip *model.SrcZip,
 	endCentralDirectory *model.EndCentralDirectory,
-	zip64 *model.Zip64,
+	zip64 *zip64.Zip64,
 	centralDirectory *model.CentralDirectory) *ZipModelBuilder {
 
 	return &ZipModelBuilder{
@@ -29,7 +32,7 @@ func (t *ZipModelBuilder) Build() *model.ZipModel {
 	return &model.ZipModel{}
 }
 
-func GetMainDiskNo(endCentralDirectory *model.EndCentralDirectory, zip64 *model.Zip64) uint32 {
+func GetMainDiskNo(endCentralDirectory *model.EndCentralDirectory, zip64 *zip64.Zip64) uint32 {
 	if zip64 == nil {
 		return uint32(endCentralDirectory.GetMainDiskNo())
 	}
@@ -37,7 +40,7 @@ func GetMainDiskNo(endCentralDirectory *model.EndCentralDirectory, zip64 *model.
 	return zip64.GetEndCentralDirectory().GetMainDiskNo()
 }
 
-func GetCentralDirectoryRelativeOffs(endCentralDirectory *model.EndCentralDirectory, zip64 *model.Zip64) uint64 {
+func GetCentralDirectoryRelativeOffs(endCentralDirectory *model.EndCentralDirectory, zip64 *zip64.Zip64) uint64 {
 	if zip64 == nil {
 		return uint64(endCentralDirectory.GetCentralDirectoryRelativeOffs())
 	}
@@ -45,7 +48,7 @@ func GetCentralDirectoryRelativeOffs(endCentralDirectory *model.EndCentralDirect
 	return zip64.GetEndCentralDirectory().GetCentralDirectoryRelativeOffs()
 }
 
-func GetTotalEntries(endCentralDirectory *model.EndCentralDirectory, zip64 *model.Zip64) uint64 {
+func GetTotalEntries(endCentralDirectory *model.EndCentralDirectory, zip64 *zip64.Zip64) uint64 {
 	if zip64 == nil {
 		return uint64(endCentralDirectory.GetTotalEntries())
 	}

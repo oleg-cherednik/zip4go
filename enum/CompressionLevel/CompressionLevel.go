@@ -1,7 +1,7 @@
 package CompressionLevel
 
 import (
-	"github.com/oleg-cherednik/zip4go/model/enum"
+	"github.com/oleg-cherednik/zip4go/enum"
 )
 
 type CompressionLevel = enum.CodeTitleEnum
@@ -12,10 +12,10 @@ var (
 	Normal    = newCompressionLevel("Normal", 6, "normal")
 	Maximum   = newCompressionLevel("Maximum", 9, "maximum")
 
-	values = map[uint]*CompressionLevel{}
+	values = map[int]*CompressionLevel{}
 )
 
-func newCompressionLevel(name string, code uint, title string) *CompressionLevel {
+func newCompressionLevel(name string, code int, title string) *CompressionLevel {
 	compressionLevel := enum.NewCodeTitleEnum(name, code, title)
 	values[code] = compressionLevel
 	return compressionLevel

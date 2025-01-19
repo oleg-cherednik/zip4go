@@ -1,6 +1,8 @@
 package SlidingDictionarySize
 
-import "github.com/oleg-cherednik/zip4go/model/enum"
+import (
+	"github.com/oleg-cherednik/zip4go/enum"
+)
 
 type SlidingDictionarySize = enum.TitleEnum
 

@@ -2,7 +2,7 @@ package CompressionMethod
 
 import (
 	"errors"
-	"github.com/oleg-cherednik/zip4go/model/enum"
+	"github.com/oleg-cherednik/zip4go/enum"
 	"strconv"
 )
 
@@ -33,21 +33,21 @@ var (
 	Ppmd               = newCompressionMethod("Ppmd", 98, "ppmd encoding")
 	Aes                = newCompressionMethod("Aes", 99, "AES encryption")
 
-	values = map[uint]*CompressionMethod{}
+	values = map[int]*CompressionMethod{}
 )
 
-func newCompressionMethod(name string, code uint, title string) *CompressionMethod {
+func newCompressionMethod(name string, code int, title string) *CompressionMethod {
 	compressionMethod := enum.NewCodeTitleEnum(name, code, title)
 	values[code] = compressionMethod
 	return compressionMethod
 }
 
-func ParseCode(code uint) *CompressionMethod {
+func ParseCode(code int) *CompressionMethod {
 	value, found := values[code]
 
 	if found {
 		return value
 	}
 
-	panic(errors.New("Unknown CompressionMethod: " + strconv.Itoa(int(code))))
+	panic(errors.New("Unknown CompressionMethod: " + strconv.Itoa(code)))
 }

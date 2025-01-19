@@ -1,4 +1,4 @@
-package model
+package zip64
 
 type Zip64EndCentralDirectory struct {
 

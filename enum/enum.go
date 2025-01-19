@@ -18,6 +18,22 @@ func (t *Enum) String() string {
 	return t.GetName()
 }
 
+// ---------- code ----------
+
+type CodeEnum struct {
+	*Enum
+	code int
+}
+
+func NewCodeEnum(name string, code int) *CodeEnum {
+	p := NewEnum(name)
+	return &CodeEnum{p, code}
+}
+
+func (t *CodeEnum) GetCode() int {
+	return t.code
+}
+
 // ---------- title ----------
 
 type TitleEnum struct {
@@ -37,15 +53,16 @@ func (t *TitleEnum) GetTitle() string {
 // ---------- code & title ----------
 
 type CodeTitleEnum struct {
-	*TitleEnum
-	code uint
+	*Enum
+	code  int
+	title string
 }
 
-func NewCodeTitleEnum(name string, code uint, title string) *CodeTitleEnum {
-	p := NewTitleEnum(name, title)
-	return &CodeTitleEnum{p, code}
+func NewCodeTitleEnum(name string, code int, title string) *CodeTitleEnum {
+	p := NewEnum(name)
+	return &CodeTitleEnum{p, code, title}
 }
 
-func (t *CodeTitleEnum) GetCode() uint {
+func (t *CodeTitleEnum) GetCode() int {
 	return t.code
 }

@@ -1,7 +1,7 @@
 package ApparentFileType
 
 import (
-	"github.com/oleg-cherednik/zip4go/model/enum"
+	"github.com/oleg-cherednik/zip4go/enum"
 )
 
 type ApparentFileType struct {
