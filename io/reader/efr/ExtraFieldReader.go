@@ -40,11 +40,11 @@ func GetExtraFieldReaders(fileHeader *model.FileHeader) *map[uint16]any {
 }
 
 func getExtraFieldReaders(uncompressedSize bool, compressedSize bool, offs bool, disk bool) *map[uint16]any {
-	//dic := map[uint16]*reader.Reader[ef.Record]{}
+	dic := map[uint16]any{}
 	//
 	//dic[sig.Zip64ExtendedInfo]
 	//
-	//values[code] = compressionLevel
+	//dic[sig.AesExtraFieldRecord] =
 
-	return nil
+	return &dic
 }

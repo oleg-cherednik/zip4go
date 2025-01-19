@@ -9,7 +9,7 @@ type Record interface {
 	GetTitle() string
 }
 
-const PkwareExtraFieldNoData = AesVersionEnum.AesVersionUnknownCode
+const PkwareExtraFieldNoData = AesVersionEnum.CodeAesVersionUnknown
 
 type PkwareExtraField struct {
 	m map[uint]*Record

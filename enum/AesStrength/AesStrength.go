@@ -1,7 +1,9 @@
 package AesStrength
 
 import (
+	"errors"
 	"github.com/oleg-cherednik/zip4go/enum"
+	"strconv"
 )
 
 type AesStrength struct {
@@ -14,9 +16,23 @@ var (
 	S128 = newAesStrength("S128", 1, 128)
 	S192 = newAesStrength("S192", 2, 192)
 	S256 = newAesStrength("S256", 3, 256)
+
+	values = map[int]*AesStrength{}
 )
 
 func newAesStrength(name string, code int, size int) *AesStrength {
 	p := enum.NewCodeEnum(name, code)
-	return &AesStrength{p, size}
+	aesStrength := AesStrength{p, size}
+	values[code] = &aesStrength
+	return &aesStrength
+}
+
+func ParseCode(code int) *AesStrength {
+	value, found := values[code]
+
+	if found {
+		return value
+	}
+
+	panic(errors.New("Unknown AesStrength: " + strconv.Itoa(code)))
 }
