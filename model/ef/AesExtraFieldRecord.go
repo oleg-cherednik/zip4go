@@ -1,8 +1,10 @@
 package ef
 
 import (
+	"fmt"
 	"github.com/oleg-cherednik/zip4go/crypto/aes"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/sig"
 )
 
 const (
@@ -32,4 +34,24 @@ func NewAesExtraFieldRecord(dataSize uint16, version *model.AesVersion, vendor s
 		vendor:            vendor,
 		strength:          strength,
 		compressionMethod: compressionMethod}
+}
+
+func (t *AesExtraFieldRecord) GetSignature() uint32 {
+	return sig.AesExtraFieldRecord
+}
+
+func (t *AesExtraFieldRecord) GetBlockSize() uint32 {
+	return AesExtraFieldRecordSize
+}
+
+func (t *AesExtraFieldRecord) IsNull() bool {
+	return false
+}
+
+func (t *AesExtraFieldRecord) GetTitle() string {
+	return "AES Encryption Tag"
+}
+
+func (t *AesExtraFieldRecord) String() string {
+	return fmt.Sprintf("AES (0x%04X)", sig.AesExtraFieldRecord)
 }

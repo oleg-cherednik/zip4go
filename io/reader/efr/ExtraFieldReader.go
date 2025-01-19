@@ -2,16 +2,19 @@ package efr
 
 import (
 	"errors"
+	"fmt"
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
+	"github.com/oleg-cherednik/zip4go/model/sig"
 )
 
 type ExtraFieldReader struct {
-	size int64
+	size    int64
+	readers *map[uint16]any
 }
 
-func NewExtraFieldReader(size int64) *ExtraFieldReader {
-	return &ExtraFieldReader{size: size}
+func NewExtraFieldReader(size int64, readers *map[uint16]any) *ExtraFieldReader {
+	return &ExtraFieldReader{size: size, readers: readers}
 }
 
 func (t *ExtraFieldReader) Read(in in.DataInput) *model.PkwareExtraField {
@@ -39,7 +42,18 @@ func GetExtraFieldReaders(fileHeader *model.FileHeader) *map[uint16]any {
 	return getExtraFieldReaders(uncompressedSize, compressedSize, offs, disk)
 }
 
+type fn1 func(uint16) any
+
 func getExtraFieldReaders(uncompressedSize bool, compressedSize bool, offs bool, disk bool) *map[uint16]any {
+	m := map[uint16]fn1{
+		sig.AesExtraFieldRecord:           NewAesExtraFieldRecordReader,
+		sig.NtfsTimestampExtraFieldRecord: NewNtfsTimestampExtraFieldRecordReader,
+	}
+
+	res := m[sig.AesExtraFieldRecord](22)
+	//m["b"]("World")
+	fmt.Println(res)
+
 	dic := map[uint16]any{}
 	//
 	//dic[sig.Zip64ExtendedInfo]

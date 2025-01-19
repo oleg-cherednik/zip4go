@@ -43,7 +43,7 @@ func (t *FileHeaderReader) readFileHeader(in in.DataInput) *model.FileHeader {
 	fileHeader.SetUncompressedSize(in.ReadDword())
 
 	fileNameLength := in.ReadWord()
-	extraFieldLength := in.ReadWord()
+	extraFieldLength := int64(in.ReadWord())
 	charMap := *charmap.CodePage437
 
 	fileHeader.SetCommentLength(in.ReadWord())
@@ -74,7 +74,6 @@ func (t *FileHeaderReader) readExternalFileAttributes(in in.DataInput) *model.Ex
 	return model.NewExternalFileAttributes(in.ReadBytes(model.ExternalFileAttributesSize))
 }
 
-func (t *FileHeaderReader) getExtraFieldReader(size uint16, fileHeader *model.FileHeader) *efr.ExtraFieldReader {
-	efr.GetExtraFieldReaders(fileHeader)
-	return nil
+func (t *FileHeaderReader) getExtraFieldReader(size int64, fileHeader *model.FileHeader) *efr.ExtraFieldReader {
+	return efr.NewExtraFieldReader(size, efr.GetExtraFieldReaders(fileHeader))
 }

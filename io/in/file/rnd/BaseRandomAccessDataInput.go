@@ -7,7 +7,7 @@ type BaseRandomAccessDataInput struct {
 	//srcZip *model.SrcZip
 }
 
-//func NewBaseRandomAccessDataInput() *BaseRandomAccessDataInput {
+//fn NewBaseRandomAccessDataInput() *BaseRandomAccessDataInput {
 //	return &BaseRandomAccessDataInput{MarkerDataInput: in.NewMarkerDataInput()}
 //}
 
@@ -15,6 +15,6 @@ type BaseRandomAccessDataInput struct {
 
 // seek
 
-//func (t *BaseRandomAccessDataInput) Available() int64 {
+//fn (t *BaseRandomAccessDataInput) Available() int64 {
 //	return t.srcZip.GetSize() //- t.child.GetAbsOffs()
 //}

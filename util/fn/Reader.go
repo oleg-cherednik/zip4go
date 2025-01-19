@@ -1,4 +1,4 @@
-package reader
+package fn
 
 import (
 	"github.com/oleg-cherednik/zip4go/io/in"

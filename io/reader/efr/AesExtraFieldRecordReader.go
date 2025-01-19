@@ -13,7 +13,7 @@ type AesExtraFieldRecordReader struct {
 	size uint16
 }
 
-func NewAesExtraFieldRecordReader(size uint16) *AesExtraFieldRecordReader {
+func NewAesExtraFieldRecordReader(size uint16) any {
 	return &AesExtraFieldRecordReader{size: size}
 }
 
