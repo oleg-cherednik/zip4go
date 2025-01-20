@@ -1,6 +1,8 @@
 package ef
 
-import AesVersionEnum "github.com/oleg-cherednik/zip4go/enum/AesVersion"
+import (
+	"github.com/oleg-cherednik/zip4go/util"
+)
 
 type Record interface {
 	GetSignature() uint32
@@ -9,7 +11,7 @@ type Record interface {
 	GetTitle() string
 }
 
-const PkwareExtraFieldNoData = AesVersionEnum.CodeAesVersionUnknown
+const PkwareExtraFieldNoData = util.NoData
 
 type PkwareExtraField struct {
 	m map[uint]*Record

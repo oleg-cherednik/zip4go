@@ -36,6 +36,8 @@ func NewAesExtraFieldRecord(dataSize uint16, version *model.AesVersion, vendor s
 		compressionMethod: compressionMethod}
 }
 
+// ---------- ef.Record ----------
+
 func (t *AesExtraFieldRecord) GetSignature() uint32 {
 	return sig.AesExtraFieldRecord
 }
@@ -51,6 +53,8 @@ func (t *AesExtraFieldRecord) IsNull() bool {
 func (t *AesExtraFieldRecord) GetTitle() string {
 	return "AES Encryption Tag"
 }
+
+// ---------- fmt.Stringer ----------
 
 func (t *AesExtraFieldRecord) String() string {
 	return fmt.Sprintf("AES (0x%04X)", sig.AesExtraFieldRecord)

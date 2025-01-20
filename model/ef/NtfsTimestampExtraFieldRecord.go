@@ -1,5 +1,7 @@
 package ef
 
+import "github.com/oleg-cherednik/zip4go/model/sig"
+
 const (
 	NtfsTimestampExtraFieldRecordSize = 2 + 2 // 4 bytes: signature + size
 	NtfsOneTagSize                    = 8 + 8 + 8
@@ -21,15 +23,28 @@ func NewNtfsTimestampExtraFieldRecord(dataSize uint16, tags *[]NtfsTag) *NtfsTim
 		tags:     tags}
 }
 
+// ---------- ef.Record ----------
+
+func (t *NtfsTimestampExtraFieldRecord) GetSignature() uint32 {
+	return sig.NtfsTimestampExtraFieldRecord
+}
+
+func (t *NtfsTimestampExtraFieldRecord) GetBlockSize() uint32 {
+	return uint32(t.dataSize + NtfsTimestampExtraFieldRecordSize)
+}
+
+func (t *NtfsTimestampExtraFieldRecord) IsNull() bool {
+	return false
+}
+
+func (t *NtfsTimestampExtraFieldRecord) GetTitle() string {
+	return "NTFS Timestamp"
+}
+
 type NtfsTag interface {
 	GetSignature() uint16
 	GetSize() int
 }
-
-//type NtfsTag interface {
-//	GetSignature() uint16
-//	GetSize() int
-//}
 
 // ---------- OneTag ----------
 

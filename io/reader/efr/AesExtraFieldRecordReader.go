@@ -22,12 +22,5 @@ func (t *AesExtraFieldRecordReader) Read(in in.DataInput) *ef.AesExtraFieldRecor
 	vendor := in.ReadString(2, *charmap.CodePage437) // should be utf8
 	strength := AesStrengthEnum.ParseCode(int(in.ReadWord()))
 	compressionMethod := CompressionMethodEnum.ParseCode(int(in.ReadWord()))
-
-	return ef.NewAesExtraFieldRecord(
-		t.size,
-		version,
-		vendor,
-		strength,
-		compressionMethod,
-	)
+	return ef.NewAesExtraFieldRecord(t.size, version, vendor, strength, compressionMethod)
 }

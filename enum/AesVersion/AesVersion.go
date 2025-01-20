@@ -3,10 +3,11 @@ package AesVersion
 import (
 	"errors"
 	"github.com/oleg-cherednik/zip4go/enum"
+	"github.com/oleg-cherednik/zip4go/util"
 	"strconv"
 )
 
-const CodeAesVersionUnknown = -1
+const CodeAesVersionUnknown = util.NoData
 
 type AesVersion = enum.CodeTitleEnum
 

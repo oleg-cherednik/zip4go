@@ -8,6 +8,7 @@ const (
 	Zip64EndCentralDirectory        = 0x06064B50
 	Zip64ExtendedInfo               = 0x0001
 
-	AesExtraFieldRecord           = 0x9901
-	NtfsTimestampExtraFieldRecord = 0x000A
+	AesExtraFieldRecord            = 0x9901
+	NtfsTimestampExtraFieldRecord  = 0x000A
+	InfoZipOldUnixExtraFieldRecord = 0x5855
 )

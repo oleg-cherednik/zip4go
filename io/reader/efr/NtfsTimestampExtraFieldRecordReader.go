@@ -32,10 +32,8 @@ func (t *NtfsTimestampExtraFieldRecordReader) readTags(offs int64, in in.DataInp
 		tag := in.ReadWord()
 
 		if tag == ef.NtfsOneTagSig {
-			//tags = append(tags, t.readOneTag(in))
 			tags = append(tags, t.readOneTag(in))
 		} else {
-			//tags = append(tags, t.readUnknownTag(in))
 			tags = append(tags, t.readUnknownTag(in))
 		}
 	}
