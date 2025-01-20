@@ -5,6 +5,7 @@ import (
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model"
 	"golang.org/x/text/encoding/charmap"
+	"math/big"
 )
 
 type SolidRandomAccessDataInput struct {
@@ -54,6 +55,10 @@ func (t *SolidRandomAccessDataInput) GetAbsOffs() int64 {
 	return t.in.GetOffs()
 }
 
+func (t *SolidRandomAccessDataInput) ReadByte() uint8 {
+	return t.in.ReadByte()
+}
+
 func (t *SolidRandomAccessDataInput) ReadWord() uint16 {
 	return t.in.ReadWord()
 }
@@ -83,6 +88,12 @@ func (t *SolidRandomAccessDataInput) ReadBytes(total int) *[]byte {
 	}
 
 	return &buf
+}
+
+func (t *SolidRandomAccessDataInput) ReadBigInt(bytes int) *big.Int {
+	uid := big.NewInt(0)
+	uid.SetString(string(*t.ReadBytes(bytes)), 16)
+	return uid
 }
 
 func (t *SolidRandomAccessDataInput) Skip(bytes int64) int64 {

@@ -41,6 +41,8 @@ func (t *NtfsTimestampExtraFieldRecord) GetTitle() string {
 	return "NTFS Timestamp"
 }
 
+// ----------
+
 type NtfsTag interface {
 	GetSignature() uint16
 	GetSize() int
@@ -75,7 +77,7 @@ func (t *OneTag) GetSize() int {
 	return NtfsOneTagSize
 }
 
-// ---------- Unknown ----------
+// ---------- UnknownTag ----------
 
 type UnknownTag struct {
 	signature uint16

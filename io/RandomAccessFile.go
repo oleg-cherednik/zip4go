@@ -89,6 +89,17 @@ func (t *RandomAccessFile) Read(buf *[]byte, offs int, len int) int {
 	return nowRead
 }
 
+func (t *RandomAccessFile) ReadByte() uint8 {
+	var v uint8
+	err := binary.Read(t.file, t.byteOrder, &v)
+
+	if err != nil {
+		panic(err)
+	}
+
+	return v
+}
+
 func (t *RandomAccessFile) ReadWord() uint16 {
 	var v uint16
 	err := binary.Read(t.file, t.byteOrder, &v)

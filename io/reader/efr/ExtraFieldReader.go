@@ -49,6 +49,7 @@ func getExtraFieldReaders(uncompressedSize bool, compressedSize bool, offs bool,
 		sig.AesExtraFieldRecord:            NewAesExtraFieldRecordReader,
 		sig.NtfsTimestampExtraFieldRecord:  NewNtfsTimestampExtraFieldRecordReader,
 		sig.InfoZipOldUnixExtraFieldRecord: NewInfoZipOldUnixExtraFieldRecordReader,
+		sig.InfoZipNewUnixExtraFieldRecord: NewInfoZipNewUnixExtraFieldRecordReader,
 	}
 
 	res := m[sig.AesExtraFieldRecord](22)

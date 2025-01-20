@@ -11,4 +11,5 @@ const (
 	AesExtraFieldRecord            = 0x9901
 	NtfsTimestampExtraFieldRecord  = 0x000A
 	InfoZipOldUnixExtraFieldRecord = 0x5855
+	InfoZipNewUnixExtraFieldRecord = 0x7875
 )
