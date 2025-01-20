@@ -6,7 +6,7 @@ import (
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model/ef"
 	"github.com/oleg-cherednik/zip4go/model/sig"
-	"github.com/oleg-cherednik/zip4go/util"
+	"github.com/oleg-cherednik/zip4go/util/time"
 )
 
 type NtfsTimestampExtraFieldRecordReader struct {
@@ -48,9 +48,9 @@ func (t *NtfsTimestampExtraFieldRecordReader) readOneTag(in in.DataInput) *ef.On
 		panic(errors.New("expecting 8 * 3"))
 	}
 
-	lastModificationTime := util.NtfsToJavaTime(in.ReadQword())
-	lastAccessTime := util.NtfsToJavaTime(in.ReadQword())
-	creationTime := util.NtfsToJavaTime(in.ReadQword())
+	lastModificationTime := time.NtfsToJava(in.ReadQword())
+	lastAccessTime := time.NtfsToJava(in.ReadQword())
+	creationTime := time.NtfsToJava(in.ReadQword())
 
 	return ef.NewOneTag(lastModificationTime, lastAccessTime, creationTime)
 }

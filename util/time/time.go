@@ -1,21 +1,21 @@
-package util
+package time
 
 // ---------- unix ----------
 
-func UnixToJavaTime(utime uint32) uint32 {
+func UnixToJava(utime uint32) uint32 {
 	return utime * 1000
 }
 
-func JavaToUnitTime(ms uint32) uint32 {
+func JavaToUnix(ms uint32) uint32 {
 	return ms / 1000
 }
 
 // ---------- ntfs ----------
 
-func NtfsToJavaTime(ntime uint64) uint64 {
+func NtfsToJava(ntime uint64) uint64 {
 	return (ntime / 10000) - +11644473600000
 }
 
-func JavaToNtfsTime(ms uint64) uint64 {
+func JavaToNtfs(ms uint64) uint64 {
 	return (ms + 11644473600000) * 10000
 }

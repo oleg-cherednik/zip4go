@@ -3,7 +3,7 @@ package efr
 import (
 	"github.com/oleg-cherednik/zip4go/io/in"
 	"github.com/oleg-cherednik/zip4go/model/ef"
-	"github.com/oleg-cherednik/zip4go/util"
+	"github.com/oleg-cherednik/zip4go/util/time"
 )
 
 type InfoZipOldUnixExtraFieldRecordReader struct {
@@ -15,8 +15,8 @@ func NewInfoZipOldUnixExtraFieldRecordReader(size uint16) any {
 }
 
 func (t *InfoZipOldUnixExtraFieldRecordReader) Read(in in.DataInput) *ef.InfoZipOldUnixExtraFieldRecord {
-	lastAccessTime := util.UnixToJavaTime(in.ReadDword())
-	lastModificationTime := util.UnixToJavaTime(in.ReadDword())
+	lastAccessTime := time.UnixToJava(in.ReadDword())
+	lastModificationTime := time.UnixToJava(in.ReadDword())
 	uid := ef.PkwareExtraFieldNoData
 	gid := ef.PkwareExtraFieldNoData
 
