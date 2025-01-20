@@ -46,11 +46,12 @@ type fn1 func(uint16) any
 
 func getExtraFieldReaders(uncompressedSize bool, compressedSize bool, offs bool, disk bool) *map[uint16]any {
 	m := map[uint16]fn1{
-		sig.AesExtraFieldRecord:               NewAesExtraFieldRecordReader,
-		sig.NtfsTimestampExtraFieldRecord:     NewNtfsTimestampExtraFieldRecordReader,
-		sig.InfoZipOldUnixExtraFieldRecord:    NewInfoZipOldUnixExtraFieldRecordReader,
-		sig.InfoZipNewUnixExtraFieldRecord:    NewInfoZipNewUnixExtraFieldRecordReader,
-		sig.ExtendedTimestampExtraFieldRecord: NewExtendedTimestampExtraFieldRecordReader,
+		sig.AesExtraFieldRecord:                    NewAesExtraFieldRecordReader,
+		sig.NtfsTimestampExtraFieldRecord:          NewNtfsTimestampExtraFieldRecordReader,
+		sig.InfoZipOldUnixExtraFieldRecord:         NewInfoZipOldUnixExtraFieldRecordReader,
+		sig.InfoZipNewUnixExtraFieldRecord:         NewInfoZipNewUnixExtraFieldRecordReader,
+		sig.ExtendedTimestampExtraFieldRecord:      NewExtendedTimestampExtraFieldRecordReader,
+		sig.StrongEncryptionHeaderExtraFieldRecord: NewStrongEncryptionHeaderExtraFieldRecord,
 	}
 
 	res := m[sig.AesExtraFieldRecord](22)

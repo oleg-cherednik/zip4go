@@ -22,9 +22,9 @@ var (
 
 func newAesStrength(name string, code int, size int) *AesStrength {
 	p := enum.NewCodeEnum(name, code)
-	aesStrength := AesStrength{p, size}
-	values[code] = &aesStrength
-	return &aesStrength
+	aesStrength := &AesStrength{p, size}
+	values[code] = aesStrength
+	return aesStrength
 }
 
 func ParseCode(code int) *AesStrength {
