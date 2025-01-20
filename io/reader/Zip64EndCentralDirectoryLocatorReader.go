@@ -10,10 +10,10 @@ import (
 
 type Zip64EndCentralDirectoryLocatorReader struct{}
 
-func (t *Zip64EndCentralDirectoryLocatorReader) Read(in in.DataInput) *zip64.Zip64EndCentralDirectoryLocator {
+func (t *Zip64EndCentralDirectoryLocatorReader) Read(in in.DataInput) *zip64.EndCentralDirectoryLocator {
 	t.checkSignature(in)
 
-	ecdl := &zip64.Zip64EndCentralDirectoryLocator{}
+	ecdl := &zip64.EndCentralDirectoryLocator{}
 	ecdl.SetMainDiskNo(in.ReadDword())
 	ecdl.SetEndCentralDirectoryRelativeOffs(in.ReadQword())
 	ecdl.SetTotalDisks(in.ReadDword())

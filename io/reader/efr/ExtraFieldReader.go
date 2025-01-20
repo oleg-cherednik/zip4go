@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/oleg-cherednik/zip4go/io/in"
+	"github.com/oleg-cherednik/zip4go/io/reader/zip64r"
 	"github.com/oleg-cherednik/zip4go/model"
 	"github.com/oleg-cherednik/zip4go/model/sig"
 )
@@ -46,6 +47,9 @@ type fn1 func(uint16) any
 
 func getExtraFieldReaders(uncompressedSize bool, compressedSize bool, offs bool, disk bool) *map[uint16]any {
 	m := map[uint16]fn1{
+		sig.Zip64ExtendedInfo: func(size uint16) any {
+			return zip64r.NewExtendedInfoReader(size, uncompressedSize, compressedSize, offs, disk)
+		},
 		sig.AesExtraFieldRecord:                    NewAesExtraFieldRecordReader,
 		sig.NtfsTimestampExtraFieldRecord:          NewNtfsTimestampExtraFieldRecordReader,
 		sig.InfoZipOldUnixExtraFieldRecord:         NewInfoZipOldUnixExtraFieldRecordReader,

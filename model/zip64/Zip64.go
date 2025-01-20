@@ -6,15 +6,15 @@ const (
 )
 
 type Zip64 struct {
-	endCentralDirectoryLocator *Zip64EndCentralDirectoryLocator
-	endCentralDirectory        *Zip64EndCentralDirectory
-	extensibleDataSector       *Zip64ExtensibleDataSector
+	endCentralDirectoryLocator *EndCentralDirectoryLocator
+	endCentralDirectory        *EndCentralDirectory
+	extensibleDataSector       *ExtensibleDataSector
 }
 
 func NewZip64(
-	endCentralDirectoryLocator *Zip64EndCentralDirectoryLocator,
-	endCentralDirectory *Zip64EndCentralDirectory,
-	extensibleDataSector *Zip64ExtensibleDataSector) *Zip64 {
+	endCentralDirectoryLocator *EndCentralDirectoryLocator,
+	endCentralDirectory *EndCentralDirectory,
+	extensibleDataSector *ExtensibleDataSector) *Zip64 {
 
 	if endCentralDirectoryLocator == nil {
 		return nil
@@ -27,15 +27,15 @@ func NewZip64(
 	}
 }
 
-func (t *Zip64) GetEndCentralDirectoryLocator() *Zip64EndCentralDirectoryLocator {
+func (t *Zip64) GetEndCentralDirectoryLocator() *EndCentralDirectoryLocator {
 	return t.endCentralDirectoryLocator
 }
 
-func (t *Zip64) GetEndCentralDirectory() *Zip64EndCentralDirectory {
+func (t *Zip64) GetEndCentralDirectory() *EndCentralDirectory {
 	return t.endCentralDirectory
 }
 
-func (t *Zip64) GetExtensibleDataSector() *Zip64ExtensibleDataSector {
+func (t *Zip64) GetExtensibleDataSector() *ExtensibleDataSector {
 	return t.extensibleDataSector
 }
 

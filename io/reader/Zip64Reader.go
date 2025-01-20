@@ -25,8 +25,8 @@ func (t *Zip64Reader) Read(in rnd.RandomAccessDataInput) *zip64.Zip64 {
 func (t *Zip64Reader) read(in rnd.RandomAccessDataInput, locatorOnly bool) *zip64.Zip64 {
 	if t.findCentralDirectoryLocatorSignature(in) {
 		locator := (&Zip64EndCentralDirectoryLocatorReader{}).Read(in)
-		var ecd *zip64.Zip64EndCentralDirectory
-		var eds *zip64.Zip64ExtensibleDataSector
+		var ecd *zip64.EndCentralDirectory
+		var eds *zip64.ExtensibleDataSector
 
 		if !locatorOnly {
 			t.findEndCentralDirectorySignature(locator, in)
@@ -40,7 +40,7 @@ func (t *Zip64Reader) read(in rnd.RandomAccessDataInput, locatorOnly bool) *zip6
 	return nil
 }
 
-func (t *Zip64Reader) readExtensibleDataSector(ecd *zip64.Zip64EndCentralDirectory, in in.DataInput) *zip64.Zip64ExtensibleDataSector {
+func (t *Zip64Reader) readExtensibleDataSector(ecd *zip64.EndCentralDirectory, in in.DataInput) *zip64.ExtensibleDataSector {
 	size := ecd.GetEndCentralDirectorySize() - model.ZIP64_ECD_SIZE
 
 	if size == 0 {
@@ -59,7 +59,7 @@ func (t *Zip64Reader) findCentralDirectoryLocatorSignature(in rnd.RandomAccessDa
 	return in.IsDwordSignature(sig.Zip64EndCentralDirectoryLocator)
 }
 
-func (t *Zip64Reader) findEndCentralDirectorySignature(locator *zip64.Zip64EndCentralDirectoryLocator, in rnd.RandomAccessDataInput) {
+func (t *Zip64Reader) findEndCentralDirectorySignature(locator *zip64.EndCentralDirectoryLocator, in rnd.RandomAccessDataInput) {
 	in.SeekStart(t.srcZip.GetAbsOffs(locator.GetMainDiskNo(), locator.GetEndCentralDirectoryRelativeOffs()))
 	absOffs := in.GetAbsOffs()
 

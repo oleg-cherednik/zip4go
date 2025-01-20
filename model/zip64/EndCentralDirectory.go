@@ -1,6 +1,6 @@
 package zip64
 
-type Zip64EndCentralDirectory struct {
+type EndCentralDirectory struct {
 
 	// size:4 - sig (0x06064b50)
 	// size:8 - directory record (n)
@@ -23,54 +23,54 @@ type Zip64EndCentralDirectory struct {
 	centralDirectoryRelativeOffs uint64
 }
 
-func (t *Zip64EndCentralDirectory) SetEndCentralDirectorySize(endCentralDirectorySize uint64) {
+func (t *EndCentralDirectory) SetEndCentralDirectorySize(endCentralDirectorySize uint64) {
 	t.endCentralDirectorySize = endCentralDirectorySize
 }
 
-func (t *Zip64EndCentralDirectory) SetVersionMadeBy(versionMadeBy uint16) {
+func (t *EndCentralDirectory) SetVersionMadeBy(versionMadeBy uint16) {
 	t.versionMadeBy = versionMadeBy
 }
 
-func (t *Zip64EndCentralDirectory) SetVersionToExtract(versionToExtract uint16) {
+func (t *EndCentralDirectory) SetVersionToExtract(versionToExtract uint16) {
 	t.versionToExtract = versionToExtract
 }
 
-func (t *Zip64EndCentralDirectory) SetDiskNo(diskNo uint32) {
+func (t *EndCentralDirectory) SetDiskNo(diskNo uint32) {
 	t.diskNo = diskNo
 }
 
-func (t *Zip64EndCentralDirectory) SetMainDiskNo(mainDiskNo uint32) {
+func (t *EndCentralDirectory) SetMainDiskNo(mainDiskNo uint32) {
 	t.mainDiskNo = mainDiskNo
 }
 
-func (t *Zip64EndCentralDirectory) SetDiskEntries(diskEntries uint64) {
+func (t *EndCentralDirectory) SetDiskEntries(diskEntries uint64) {
 	t.diskEntries = diskEntries
 }
 
-func (t *Zip64EndCentralDirectory) SetTotalEntries(totalEntries uint64) {
+func (t *EndCentralDirectory) SetTotalEntries(totalEntries uint64) {
 	t.totalEntries = totalEntries
 }
 
-func (t *Zip64EndCentralDirectory) SetCentralDirectorySize(centralDirectorySize uint64) {
+func (t *EndCentralDirectory) SetCentralDirectorySize(centralDirectorySize uint64) {
 	t.centralDirectorySize = centralDirectorySize
 }
 
-func (t *Zip64EndCentralDirectory) SetCentralDirectoryRelativeOffs(centralDirectoryRelativeOffs uint64) {
+func (t *EndCentralDirectory) SetCentralDirectoryRelativeOffs(centralDirectoryRelativeOffs uint64) {
 	t.centralDirectoryRelativeOffs = centralDirectoryRelativeOffs
 }
 
-func (t *Zip64EndCentralDirectory) GetEndCentralDirectorySize() uint64 {
+func (t *EndCentralDirectory) GetEndCentralDirectorySize() uint64 {
 	return t.endCentralDirectorySize
 }
 
-func (t *Zip64EndCentralDirectory) GetMainDiskNo() uint32 {
+func (t *EndCentralDirectory) GetMainDiskNo() uint32 {
 	return t.mainDiskNo
 }
 
-func (t *Zip64EndCentralDirectory) GetTotalEntries() uint64 {
+func (t *EndCentralDirectory) GetTotalEntries() uint64 {
 	return t.totalEntries
 }
 
-func (t *Zip64EndCentralDirectory) GetCentralDirectoryRelativeOffs() uint64 {
+func (t *EndCentralDirectory) GetCentralDirectoryRelativeOffs() uint64 {
 	return t.centralDirectoryRelativeOffs
 }
