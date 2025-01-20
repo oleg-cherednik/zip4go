@@ -52,6 +52,8 @@ func getExtraFieldReaders(uncompressedSize bool, compressedSize bool, offs bool,
 		sig.InfoZipNewUnixExtraFieldRecord:         NewInfoZipNewUnixExtraFieldRecordReader,
 		sig.ExtendedTimestampExtraFieldRecord:      NewExtendedTimestampExtraFieldRecordReader,
 		sig.StrongEncryptionHeaderExtraFieldRecord: NewStrongEncryptionHeaderExtraFieldRecord,
+		sig.ExecutableJarMarkerExtraFieldRecord:    NewExecutableJarMarkerExtraFieldRecordReader,
+		sig.AlignmentExtraFieldRecord:              NewAlignmentExtraFieldRecordReader,
 	}
 
 	res := m[sig.AesExtraFieldRecord](22)

@@ -1,6 +1,11 @@
 package ef
 
-import "github.com/oleg-cherednik/zip4go/crypto/strong"
+import (
+	"github.com/oleg-cherednik/zip4go/crypto/strong"
+	"github.com/oleg-cherednik/zip4go/model/sig"
+)
+
+const StrongEncryptionHeaderExtraFieldRecordSize = 2 + 2 // 4 bytes: signature + size
 
 type StrongEncryptionHeaderExtraFieldRecord struct {
 	// size:2 - tag for this "extra" block type (0x0017)
@@ -28,4 +33,22 @@ func NewStrongEncryptionHeaderExtraFieldRecord(dataSize uint16, format uint16,
 		flag:                flag,
 		unknown:             unknown,
 	}
+}
+
+// ---------- ef.Record ----------
+
+func (t *StrongEncryptionHeaderExtraFieldRecord) GetSignature() uint32 {
+	return sig.StrongEncryptionHeaderExtraFieldRecord
+}
+
+func (t *StrongEncryptionHeaderExtraFieldRecord) GetBlockSize() uint32 {
+	return StrongEncryptionHeaderExtraFieldRecordSize
+}
+
+func (t *StrongEncryptionHeaderExtraFieldRecord) IsNull() bool {
+	return false
+}
+
+func (t *StrongEncryptionHeaderExtraFieldRecord) GetTitle() string {
+	return "PKZIP Strong Encryption Tag"
 }

@@ -14,4 +14,6 @@ const (
 	InfoZipNewUnixExtraFieldRecord         = 0x7875
 	ExtendedTimestampExtraFieldRecord      = 0x5455
 	StrongEncryptionHeaderExtraFieldRecord = 0x0017
+	ExecutableJarMarkerExtraFieldRecord    = 0xCAFE
+	AlignmentExtraFieldRecord              = 0xD935
 )
